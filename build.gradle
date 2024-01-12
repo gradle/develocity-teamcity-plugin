@@ -19,7 +19,7 @@ ext {
 def buildTimestamp = CI ? timestamp(buildTime) : 'prerelease'
 def snapshotVersion = RELEASE ? '' : buildTimestamp
 
-group = 'nu.studer'
+group = 'com.gradle.develocity'
 version = baseVersion + (snapshotVersion ? "-$snapshotVersion" : '')
 
 def teamCityApiVersion = '2020.1'
@@ -51,15 +51,14 @@ teamcity {
 
     server {
         descriptor {
-            name = 'GradleBuildScanIntegration'
+            name = 'DevelocityBuildScanIntegration'
             displayName = 'Integration for Gradle and Maven build scans'
             description = 'Provides easy navigation from TeamCity builds to Gradle and Maven build scans'
             version = project.version
-            vendorName = 'Etienne Studer'
-            vendorUrl = 'https://github.com/etiennestuder'
+            vendorName = 'Gradle Inc.'
+            vendorUrl = 'https://github.com/gradle'
 
             // optional properties
-            email = 'etienne@studer.nu'
             downloadUrl = 'https://github.com/etiennestuder/teamcity-build-scan-plugin'
             useSeparateClassloader = true
         }
@@ -86,8 +85,8 @@ teamcity {
 
 githubRelease {
     token = System.getenv('TEAMCITY_PLUGIN_GIT_TOKEN') ?: ''
-    owner = 'etiennestuder'
-    repo = 'teamcity-build-scan-plugin'
+    owner = 'gradle'
+    repo = 'develocity-teamcity-plugin'
     targetCommitish = 'main'
     releaseName = gitHubReleaseName()
     tagName = gitReleaseTag()

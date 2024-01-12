@@ -6,7 +6,7 @@
     <version>1.0</version>
     <name>Service Message Maven Extension</name>
     <description>Maven extension to send services messages containing build scan links to the TeamCity server</description>
-    <url>https://github.com/etiennestuder/teamcity-build-scan-plugin</url>
+    <url>https://github.com/gradle/develocity-teamcity-plugin</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
