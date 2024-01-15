@@ -9,7 +9,7 @@ develocity-teamcity-plugin
 
 # Overview
 
-[TeamCity](https://www.jetbrains.com/teamcity/) plugin that integrates with the Build Scan service and more generally with Develocity for Gradle and Maven builds run via TeamCity. Build scans are available as a free service on [scans.gradle.com](https://scans.gradle.com/) and commercially via [Develocity](https://gradle.com).
+[TeamCity](https://www.jetbrains.com/teamcity/) plugin that integrates with the Build Scan service and more generally with Develocity for Gradle and Maven builds run via TeamCity. Build scans are available as a free service on [scans.gradle.com](https://scans.gradle.com/) and commercially via [Develocity](https://gradle.com/develocity).
 
 For each Gradle and Maven build that is run from TeamCity, this plugin exposes the links to the created build scans in the TeamCity UI. The plugin can also be configured to ad-hoc connect Gradle and Maven builds to an existing Develocity instance such that a Build Scan is published each time a build is run from TeamCity.
 
@@ -150,7 +150,7 @@ The TeamCity configuration parameters can be set on any project and are automati
 
 The version of the Develocity Gradle plugin and the Develocity Maven extension that are applied to a build must meet a minimum version requirement for the link surfacing to work.
 
-| Develocity Teamcity Plugin version | Minimum supported GE Maven extension version | Minimum supported GE Gradle plugin version |
+| Develocity Teamcity Plugin version | Minimum supported Develocity Maven extension version | Minimum supported Develocity Gradle plugin version |
 |------------------------------------|----------------------------------------------|--------------------------------------------|
 | Next                               | 1.11                                         | 3.0  (or Gradle Build Scan plugin 1.8)     |
 
@@ -172,7 +172,7 @@ For Maven builds, the version of the Develocity Maven extension automatically ap
 
 <summary>Click for an overview of what Maven extension versions are bundled and injected.</summary>
 
-| Develocity Teamcity Plugin version | Injected GE Maven extension version | Injected Common CCUD Maven extension version |
+| Develocity Teamcity Plugin version | Injected Develocity Maven extension version | Injected Common Custom User Data Maven extension version |
 |------------------------------------|-------------------------------------|----------------------------------------------|
 | Next                               | 1.20                                | 1.12.5                                       |
 
