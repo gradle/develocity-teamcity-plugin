@@ -51,7 +51,7 @@ teamcity {
 
     server {
         descriptor {
-            name = 'DevelocityBuildScanIntegration'
+            name = 'Develocity'
             displayName = 'Integration for Gradle and Maven build scans'
             description = 'Provides easy navigation from TeamCity builds to Gradle and Maven build scans'
             version = project.version

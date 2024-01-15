@@ -7,7 +7,7 @@ plugins {
 def isCI = System.getenv('CI') != null
 
 gradleEnterprise {
-    server = 'https://etiennestuder.gradle-enterprise.cloud'
+    server = 'https://scans.gradle.com'
 
     buildScan {
         publishAlways()
