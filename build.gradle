@@ -56,10 +56,9 @@ teamcity {
             description = 'Provides easy navigation from TeamCity builds to Gradle and Maven build scans'
             version = project.version
             vendorName = 'Gradle Inc.'
-            vendorUrl = 'https://github.com/gradle'
+            vendorUrl = 'https://gradle.com'
 
             // optional properties
-            downloadUrl = 'https://github.com/etiennestuder/teamcity-build-scan-plugin'
             useSeparateClassloader = true
         }
 
