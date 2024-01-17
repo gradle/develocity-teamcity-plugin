@@ -2,7 +2,7 @@ import org.gradle.util.GradleVersion
 
 // note that there is no mechanism to share code between the initscript{} block and the main script, so some logic is duplicated
 
-// conditionally apply the GE / Build Scan plugin to the classpath so it can be applied to the build further down in this script
+// conditionally apply the Develocity / Build Scan plugin to the classpath so it can be applied to the build further down in this script
 initscript {
     def isTopLevelBuild = !gradle.parent
     if (!isTopLevelBuild) {
@@ -14,22 +14,22 @@ initscript {
         return System.getProperty(name) ?: System.getenv(envVarName)
     }
 
-    def requestedInitScriptName = getInputParam('teamCityBuildScanPlugin.init-script.name')
+    def requestedInitScriptName = getInputParam('teamCityDevelocityPlugin.init-script.name')
     def initScriptName = buildscript.sourceFile.name
     if (requestedInitScriptName != initScriptName) {
         return
     }
 
-    def pluginRepositoryUrl = getInputParam('teamCityBuildScanPlugin.gradle.plugin-repository.url')
-    def gePluginVersion = getInputParam('teamCityBuildScanPlugin.gradle-enterprise.plugin.version')
-    def ccudPluginVersion = getInputParam('teamCityBuildScanPlugin.ccud.plugin.version')
+    def pluginRepositoryUrl = getInputParam('teamCityDevelocityPlugin.gradle.plugin-repository.url')
+    def gePluginVersion = getInputParam('teamCityDevelocityPlugin.develocity.plugin.version')
+    def ccudPluginVersion = getInputParam('teamCityDevelocityPlugin.ccud.plugin.version')
 
     def atLeastGradle5 = GradleVersion.current() >= GradleVersion.version('5.0')
     def atLeastGradle4 = GradleVersion.current() >= GradleVersion.version('4.0')
 
     if (gePluginVersion || ccudPluginVersion && atLeastGradle4) {
         pluginRepositoryUrl = pluginRepositoryUrl ?: 'https://plugins.gradle.org/m2'
-        logger.quiet("Gradle Enterprise plugins resolution: $pluginRepositoryUrl")
+        logger.quiet("Develocity plugins resolution: $pluginRepositoryUrl")
 
         repositories {
             maven { url pluginRepositoryUrl }
@@ -52,9 +52,9 @@ initscript {
 def BUILD_SCAN_PLUGIN_ID = 'com.gradle.build-scan'
 def BUILD_SCAN_PLUGIN_CLASS = 'com.gradle.scan.plugin.BuildScanPlugin'
 
-def GRADLE_ENTERPRISE_PLUGIN_ID = 'com.gradle.enterprise'
-def GRADLE_ENTERPRISE_PLUGIN_CLASS = 'com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin'
-def GRADLE_ENTERPRISE_EXTENSION_CLASS = 'com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension'
+def DEVELOCITY_PLUGIN_ID = 'com.gradle.enterprise'
+def DEVELOCITY_PLUGIN_CLASS = 'com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin'
+def DEVELOCITY_EXTENSION_CLASS = 'com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension'
 
 def CCUD_PLUGIN_ID = 'com.gradle.common-custom-user-data-gradle-plugin'
 def CCUD_PLUGIN_CLASS = 'com.gradle.CommonCustomUserDataGradlePlugin'
@@ -69,18 +69,18 @@ def getInputParam = { String name ->
     return System.getProperty(name) ?: System.getenv(envVarName)
 }
 
-def requestedInitScriptName = getInputParam('teamCityBuildScanPlugin.init-script.name')
+def requestedInitScriptName = getInputParam('teamCityDevelocityPlugin.init-script.name')
 def initScriptName = buildscript.sourceFile.name
 if (requestedInitScriptName != initScriptName) {
     logger.quiet("Ignoring init script '${initScriptName}' as requested name '${requestedInitScriptName}' does not match")
     return
 }
 
-def geUrl = getInputParam('teamCityBuildScanPlugin.gradle-enterprise.url')
-def geAllowUntrustedServer = Boolean.parseBoolean(getInputParam('teamCityBuildScanPlugin.gradle-enterprise.allow-untrusted-server'))
-def geEnforceUrl = Boolean.parseBoolean(getInputParam('teamCityBuildScanPlugin.gradle-enterprise.enforce-url'))
-def gePluginVersion = getInputParam('teamCityBuildScanPlugin.gradle-enterprise.plugin.version')
-def ccudPluginVersion = getInputParam('teamCityBuildScanPlugin.ccud.plugin.version')
+def develocityUrl = getInputParam('teamCityDevelocityPlugin.develocity.url')
+def develocityAllowUntrustedServer = Boolean.parseBoolean(getInputParam('teamCityDevelocityPlugin.develocity.allow-untrusted-server'))
+def develocityEnforceUrl = Boolean.parseBoolean(getInputParam('teamCityDevelocityPlugin.develocity.enforce-url'))
+def develocityPluginVersion = getInputParam('teamCityDevelocityPlugin.develocity.plugin.version')
+def ccudPluginVersion = getInputParam('teamCityDevelocityPlugin.ccud.plugin.version')
 
 def atLeastGradle4 = GradleVersion.current() >= GradleVersion.version('4.0')
 
@@ -112,28 +112,28 @@ if (GradleVersion.current() < GradleVersion.version('6.0')) {
         buildscript.configurations.getByName("classpath").incoming.afterResolve { ResolvableDependencies incoming ->
             def resolutionResult = incoming.resolutionResult
 
-            if (gePluginVersion) {
+            if (develocityPluginVersion) {
                 def scanPluginComponent = resolutionResult.allComponents.find {
                     it.moduleVersion.with { group == "com.gradle" && (name == "build-scan-plugin" || name == "gradle-enterprise-gradle-plugin") }
                 }
 
                 if (!scanPluginComponent) {
                     logger.quiet("Applying $BUILD_SCAN_PLUGIN_CLASS via init script")
-                    logger.quiet("Connection to Gradle Enterprise: $geUrl, allowUntrustedServer: $geAllowUntrustedServer")
+                    logger.quiet("Connection to Develocity: $develocityUrl, allowUntrustedServer: $develocityAllowUntrustedServer")
                     applyPluginExternally(pluginManager, BUILD_SCAN_PLUGIN_CLASS)
-                    buildScan.server = geUrl
-                    buildScan.allowUntrustedServer = geAllowUntrustedServer
+                    buildScan.server = develocityUrl
+                    buildScan.allowUntrustedServer = develocityAllowUntrustedServer
                     buildScan.publishAlways()
                     if (buildScan.metaClass.respondsTo(buildScan, 'setUploadInBackground', Boolean)) buildScan.uploadInBackground = false  // uploadInBackground not available for build-scan-plugin 1.16
                     buildScan.value 'CI auto injection', 'TeamCity'
                 }
 
-                if (geUrl && geEnforceUrl) {
+                if (develocityUrl && develocityEnforceUrl) {
                     pluginManager.withPlugin(BUILD_SCAN_PLUGIN_ID) {
                         afterEvaluate {
-                            logger.quiet("Enforcing Gradle Enterprise: $geUrl, allowUntrustedServer: $geAllowUntrustedServer")
-                            buildScan.server = geUrl
-                            buildScan.allowUntrustedServer = geAllowUntrustedServer
+                            logger.quiet("Enforcing Develocity: $develocityUrl, allowUntrustedServer: $develocityAllowUntrustedServer")
+                            buildScan.server = develocityUrl
+                            buildScan.allowUntrustedServer = develocityAllowUntrustedServer
                         }
                     }
                 }
@@ -157,25 +157,25 @@ if (GradleVersion.current() < GradleVersion.version('6.0')) {
     }
 } else {
     gradle.settingsEvaluated { settings ->
-        if (gePluginVersion) {
-            if (!settings.pluginManager.hasPlugin(GRADLE_ENTERPRISE_PLUGIN_ID)) {
-                logger.quiet("Applying $GRADLE_ENTERPRISE_PLUGIN_CLASS via init script")
-                logger.quiet("Connection to Gradle Enterprise: $geUrl, allowUntrustedServer: $geAllowUntrustedServer")
-                applyPluginExternally(settings.pluginManager, GRADLE_ENTERPRISE_PLUGIN_CLASS)
-                extensionsWithPublicType(settings, GRADLE_ENTERPRISE_EXTENSION_CLASS).collect { settings[it.name] }.each { ext ->
-                    ext.server = geUrl
-                    ext.allowUntrustedServer = geAllowUntrustedServer
+        if (develocityPluginVersion) {
+            if (!settings.pluginManager.hasPlugin(DEVELOCITY_PLUGIN_ID)) {
+                logger.quiet("Applying $DEVELOCITY_PLUGIN_CLASS via init script")
+                logger.quiet("Connection to Develocity: $develocityUrl, allowUntrustedServer: $develocityAllowUntrustedServer")
+                applyPluginExternally(settings.pluginManager, DEVELOCITY_PLUGIN_CLASS)
+                extensionsWithPublicType(settings, DEVELOCITY_EXTENSION_CLASS).collect { settings[it.name] }.each { ext ->
+                    ext.server = develocityUrl
+                    ext.allowUntrustedServer = develocityAllowUntrustedServer
                     ext.buildScan.publishAlways()
                     ext.buildScan.uploadInBackground = false
                     ext.buildScan.value 'CI auto injection', 'TeamCity'
                 }
             }
 
-            if (geUrl && geEnforceUrl) {
-                extensionsWithPublicType(settings, GRADLE_ENTERPRISE_EXTENSION_CLASS).collect { settings[it.name] }.each { ext ->
-                    logger.quiet("Enforcing Gradle Enterprise: $geUrl, allowUntrustedServer: $geAllowUntrustedServer")
-                    ext.server = geUrl
-                    ext.allowUntrustedServer = geAllowUntrustedServer
+            if (develocityUrl && develocityEnforceUrl) {
+                extensionsWithPublicType(settings, DEVELOCITY_EXTENSION_CLASS).collect { settings[it.name] }.each { ext ->
+                    logger.quiet("Enforcing Develocity: $develocityUrl, allowUntrustedServer: $develocityAllowUntrustedServer")
+                    ext.server = develocityUrl
+                    ext.allowUntrustedServer = develocityAllowUntrustedServer
                 }
             }
         }
@@ -187,14 +187,14 @@ if (GradleVersion.current() < GradleVersion.version('6.0')) {
             }
         }
 
-        extensionsWithPublicType(settings, GRADLE_ENTERPRISE_EXTENSION_CLASS).collect { settings[it.name] }.each { ext ->
+        extensionsWithPublicType(settings, DEVELOCITY_EXTENSION_CLASS).collect { settings[it.name] }.each { ext ->
             buildScanPublishedAction(ext.buildScan)
         }
     }
 }
 
 void applyPluginExternally(PluginManager pluginManager, String pluginClassName) {
-    def externallyApplied = 'gradle.enterprise.externally-applied'
+    def externallyApplied = 'develocity.externally-applied'
     def oldValue = System.getProperty(externallyApplied)
     System.setProperty(externallyApplied, 'true')
     try {
@@ -229,7 +229,7 @@ class BuildScanLifeCycleLogger {
     }
 
     private static String generateBuildScanLifeCycleMessage(def attribute) {
-        return "##teamcity[nu.studer.teamcity.buildscan.buildScanLifeCycle '${escape(attribute as String)}']" as String
+        return "##teamcity[com.gradle.develocity.buildScanLifeCycle '${escape(attribute as String)}']" as String
     }
 
     private static String escape(String value) {
