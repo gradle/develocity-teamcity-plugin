@@ -9,7 +9,7 @@ class ServiceMessageExtensionApplicationTest extends BaseExtensionApplicationTes
 
     def "build succeeds when service message maven extension is applied to a project without Develocity in the extension classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration().buildIn(checkoutDir)

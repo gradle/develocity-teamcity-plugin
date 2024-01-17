@@ -10,19 +10,19 @@ class CustomCoordinatesExtensionApplicationTest extends BaseExtensionApplication
 
     def "does not inject Develocity extension when not defined in project but matching custom coordinates defined in project (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration(
-            geUrl: GE_URL,
+            geUrl: DEVELOCITY_URL,
             // using Guava as surrogate since we do not have a custom extension at hand that pulls in the Develocity Maven extension transitively
             customExtension: new GroupArtifactVersion(group: 'com.google.guava', artifact: 'guava', version: '31.1-jre')
         ).buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
-                develocityExtensionVersion: GE_EXTENSION_VERSION,
+                develocityUrl: DEVELOCITY_URL,
+                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
                 develocityExtensionCustomCoordinates: 'com.google.guava:guava',
         )
 
@@ -43,19 +43,19 @@ class CustomCoordinatesExtensionApplicationTest extends BaseExtensionApplication
 
     def "does not inject CCUD extension when not defined in project but matching custom coordinates defined in project (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration(
-            geUrl: GE_URL,
-            geExtensionVersion: GE_EXTENSION_VERSION,
+            geUrl: DEVELOCITY_URL,
+            geExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
             // using Guava as surrogate since we do not have a custom extension at hand that pulls in the Develocity Maven extension transitively
             customExtension: new GroupArtifactVersion(group: 'com.google.guava', artifact: 'guava', version: '31.1-jre')
         ).buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
+                develocityUrl: DEVELOCITY_URL,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION,
             ccudExtensionCustomCoordinates: 'com.google.guava:guava',
         )

@@ -9,14 +9,14 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
 
     def "applies CCUD extension via classpath when not defined in project where Develocity extension not defined in project and not applied via classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration().buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
+                develocityUrl: DEVELOCITY_URL,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION,
         )
 
@@ -37,15 +37,15 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
 
     def "applies CCUD extension via classpath when not defined in project where Develocity extension applied via classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration().buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
-                develocityExtensionVersion: GE_EXTENSION_VERSION,
+                develocityUrl: DEVELOCITY_URL,
+                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION,
         )
 
@@ -53,7 +53,7 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
         def output = run(jdkCompatibleMavenVersion.mavenVersion, mvnProject, gePluginConfig)
 
         then:
-        1 * extensionApplicationListener.geExtensionApplied(GE_EXTENSION_VERSION)
+        1 * extensionApplicationListener.geExtensionApplied(DEVELOCITY_EXTENSION_VERSION)
         1 * extensionApplicationListener.ccudExtensionApplied(CCUD_EXTENSION_VERSION)
 
         and:
@@ -66,18 +66,18 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
 
     def "applies CCUD extension via classpath when not defined in project where Develocity extension defined in project (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration(
-            geUrl: GE_URL,
-            geExtensionVersion: GE_EXTENSION_VERSION,
+            geUrl: DEVELOCITY_URL,
+            geExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         ).buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
-                develocityExtensionVersion: GE_EXTENSION_VERSION,
+                develocityUrl: DEVELOCITY_URL,
+                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION,
         )
 
@@ -98,19 +98,19 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
 
     def "applies CCUD extension via project when defined in project (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration(
-            geUrl: GE_URL,
-            geExtensionVersion: GE_EXTENSION_VERSION,
+            geUrl: DEVELOCITY_URL,
+            geExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION
         ).buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
-                develocityExtensionVersion: GE_EXTENSION_VERSION,
+                develocityUrl: DEVELOCITY_URL,
+                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION,
         )
 

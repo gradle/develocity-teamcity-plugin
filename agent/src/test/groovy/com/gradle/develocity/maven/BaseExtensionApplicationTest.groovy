@@ -36,9 +36,9 @@ class BaseExtensionApplicationTest extends Specification {
         new JdkCompatibleMavenVersion('3.2.5', 6, 11)
     ]
 
-    static final String GE_URL_STR = System.getenv('GRADLE_ENTERPRISE_TEST_INSTANCE')
-    static final URI GE_URL = GE_URL_STR ? new URI(GE_URL_STR) : null
-    static final String GE_EXTENSION_VERSION = '1.20'
+    static final String DEVELOCITY_URL_STR = System.getenv('GRADLE_ENTERPRISE_TEST_INSTANCE')
+    static final URI DEVELOCITY_URL = DEVELOCITY_URL_STR ? new URI(DEVELOCITY_URL_STR) : null
+    static final String DEVELOCITY_EXTENSION_VERSION = '1.20'
     static final String CCUD_EXTENSION_VERSION = '1.12.5'
 
     @TempDir
@@ -100,13 +100,13 @@ class BaseExtensionApplicationTest extends Specification {
     }
 
     void outputContainsTeamCityServiceMessageBuildScanUrl(String output) {
-        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_SCAN_URL:${GE_URL}/s/"
+        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_SCAN_URL:${DEVELOCITY_URL}/s/"
         assert output.contains(serviceMsg)
         assert 1 == output.count(serviceMsg)
     }
 
     void outputMissesTeamCityServiceMessageBuildScanUrl(String output) {
-        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_SCAN_URL:${GE_URL}/s/"
+        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_SCAN_URL:${DEVELOCITY_URL}/s/"
         assert !output.contains(serviceMsg)
     }
 

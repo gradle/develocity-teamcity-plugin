@@ -10,15 +10,15 @@ class TeamCityGoalFilteringExtensionApplicationTest extends BaseExtensionApplica
 
     def "does not publish build scan for TeamCity specific info goal invocation (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
-        assumeTrue GE_URL != null
+        assumeTrue DEVELOCITY_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration().buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: GE_URL,
-                develocityExtensionVersion: GE_EXTENSION_VERSION,
+                develocityUrl: DEVELOCITY_URL,
+                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:
