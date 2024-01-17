@@ -55,14 +55,14 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
     // TeamCity Develocity configuration parameters
 
     private static final String GRADLE_PLUGIN_REPOSITORY_CONFIG_PARAM = "develocityPlugin.gradle.plugin-repository.url";
-    private static final String GE_URL_CONFIG_PARAM = "develocityPlugin.develocity.url";
-    private static final String GE_ALLOW_UNTRUSTED_CONFIG_PARAM = "develocityPlugin.develocity.allow-untrusted-server";
-    private static final String GE_ENFORCE_URL_CONFIG_PARAM = "develocityPlugin.develocity.enforce-url";
-    private static final String GE_PLUGIN_VERSION_CONFIG_PARAM = "develocityPlugin.develocity.plugin.version";
+    private static final String DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.develocity.url";
+    private static final String DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM = "develocityPlugin.develocity.allow-untrusted-server";
+    private static final String DEVELOCITY_ENFORCE_URL_CONFIG_PARAM = "develocityPlugin.develocity.enforce-url";
+    private static final String DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM = "develocityPlugin.develocity.plugin.version";
     private static final String CCUD_PLUGIN_VERSION_CONFIG_PARAM = "develocityPlugin.ccud.plugin.version";
-    private static final String GE_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.develocity.extension.version";
+    private static final String DEVELOCITY_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.develocity.extension.version";
     private static final String CCUD_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.ccud.extension.version";
-    private static final String CUSTOM_GE_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.develocity.extension.custom.coordinates";
+    private static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.develocity.extension.custom.coordinates";
     private static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.ccud.extension.custom.coordinates";
     private static final String INSTRUMENT_COMMAND_LINE_RUNNER_CONFIG_PARAM = "develocityPlugin.command-line-build-step.enabled";
 
@@ -152,10 +152,10 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
 
     private void addGradleInitScriptEnvVars(@NotNull File initScript, @NotNull BuildRunnerContext runner) {
         addEnvVarIfSet(GRADLE_PLUGIN_REPOSITORY_CONFIG_PARAM, GRADLE_PLUGIN_REPOSITORY_VAR, runner);
-        addEnvVarIfSet(GE_URL_CONFIG_PARAM, DEVELOCITY_URL_VAR, runner);
-        addEnvVarIfSet(GE_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_VAR, runner);
-        addEnvVarIfSet(GE_ENFORCE_URL_CONFIG_PARAM, DEVELOCITY_ENFORCE_URL_VAR, runner);
-        addEnvVarIfSet(GE_PLUGIN_VERSION_CONFIG_PARAM, DEVELOCITY_PLUGIN_VERSION_VAR, runner);
+        addEnvVarIfSet(DEVELOCITY_URL_CONFIG_PARAM, DEVELOCITY_URL_VAR, runner);
+        addEnvVarIfSet(DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_VAR, runner);
+        addEnvVarIfSet(DEVELOCITY_ENFORCE_URL_CONFIG_PARAM, DEVELOCITY_ENFORCE_URL_VAR, runner);
+        addEnvVarIfSet(DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM, DEVELOCITY_PLUGIN_VERSION_VAR, runner);
         addEnvVarIfSet(CCUD_PLUGIN_VERSION_CONFIG_PARAM, CCUD_PLUGIN_VERSION_VAR, runner);
 
         // the init-script is inactive by default, supply the script name env var to activate it
@@ -214,19 +214,19 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
 
         // optionally add extensions that connect the Maven build with Develocity
         MavenExtensions extensions = getMavenExtensions(runner);
-        String geExtensionVersion = getOptionalConfigParam(GE_EXTENSION_VERSION_CONFIG_PARAM, runner);
+        String geExtensionVersion = getOptionalConfigParam(DEVELOCITY_EXTENSION_VERSION_CONFIG_PARAM, runner);
         if (geExtensionVersion != null) {
-            MavenCoordinates customGeExtensionCoords = parseCoordinates(getOptionalConfigParam(CUSTOM_GE_EXTENSION_COORDINATES_CONFIG_PARAM, runner));
-            String geUrl = getOptionalConfigParam(GE_URL_CONFIG_PARAM, runner);
+            MavenCoordinates customGeExtensionCoords = parseCoordinates(getOptionalConfigParam(CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM, runner));
+            String geUrl = getOptionalConfigParam(DEVELOCITY_URL_CONFIG_PARAM, runner);
             if (!extensions.hasExtension(DEVELOCITY_EXTENSION_MAVEN_COORDINATES) && !extensions.hasExtension(customGeExtensionCoords)) {
                 extensionApplicationListener.geExtensionApplied(geExtensionVersion);
                 extensionJars.add(getExtensionJar(DEVELOCITY_EXT_MAVEN, runner));
-                addSysPropIfSet(GE_URL_CONFIG_PARAM, DEVELOCITY_URL_MAVEN_PROPERTY, sysProps, runner);
-                addSysPropIfSet(GE_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_MAVEN_PROPERTY, sysProps, runner);
+                addSysPropIfSet(DEVELOCITY_URL_CONFIG_PARAM, DEVELOCITY_URL_MAVEN_PROPERTY, sysProps, runner);
+                addSysPropIfSet(DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_MAVEN_PROPERTY, sysProps, runner);
                 addSysProp(DEVELOCITY_EXTENSION_UPLOAD_IN_BACKGROUND_MAVEN_PROPERTY, "false", sysProps);
-            } else if (geUrl != null && Boolean.parseBoolean(getOptionalConfigParam(GE_ENFORCE_URL_CONFIG_PARAM, runner))) {
-                addSysPropIfSet(GE_URL_CONFIG_PARAM, DEVELOCITY_URL_MAVEN_PROPERTY, sysProps, runner);
-                addSysPropIfSet(GE_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_MAVEN_PROPERTY, sysProps, runner);
+            } else if (geUrl != null && Boolean.parseBoolean(getOptionalConfigParam(DEVELOCITY_ENFORCE_URL_CONFIG_PARAM, runner))) {
+                addSysPropIfSet(DEVELOCITY_URL_CONFIG_PARAM, DEVELOCITY_URL_MAVEN_PROPERTY, sysProps, runner);
+                addSysPropIfSet(DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_MAVEN_PROPERTY, sysProps, runner);
             }
         }
 
