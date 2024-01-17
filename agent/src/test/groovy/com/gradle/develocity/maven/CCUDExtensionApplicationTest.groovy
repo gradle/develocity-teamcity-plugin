@@ -7,7 +7,7 @@ import static org.junit.Assume.assumeTrue
 
 class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
 
-    def "applies CCUD extension via classpath when not defined in project where GE extension not defined in project and not applied via classpath (#jdkCompatibleMavenVersion)"() {
+    def "applies CCUD extension via classpath when not defined in project where Develocity extension not defined in project and not applied via classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 
@@ -35,7 +35,7 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
         jdkCompatibleMavenVersion << SUPPORTED_MAVEN_VERSIONS
     }
 
-    def "applies CCUD extension via classpath when not defined in project where GE extension applied via classpath (#jdkCompatibleMavenVersion)"() {
+    def "applies CCUD extension via classpath when not defined in project where Develocity extension applied via classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 
@@ -64,7 +64,7 @@ class CCUDExtensionApplicationTest extends BaseExtensionApplicationTest {
         jdkCompatibleMavenVersion << SUPPORTED_MAVEN_VERSIONS
     }
 
-    def "applies CCUD extension via classpath when not defined in project where GE extension defined in project (#jdkCompatibleMavenVersion)"() {
+    def "applies CCUD extension via classpath when not defined in project where Develocity extension defined in project (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 

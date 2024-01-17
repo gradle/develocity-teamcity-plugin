@@ -7,7 +7,7 @@ import static org.junit.Assume.assumeTrue
 
 class UrlConfigurationExtensionApplicationTest extends BaseExtensionApplicationTest {
 
-    def "ignores GE URL requested via TC config when GE extension is not applied via the classpath (#jdkCompatibleMavenVersion)"() {
+    def "ignores Develocity URL requested via TC config when Develocity extension is not applied via the classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 
@@ -39,7 +39,7 @@ class UrlConfigurationExtensionApplicationTest extends BaseExtensionApplicationT
         jdkCompatibleMavenVersion << SUPPORTED_MAVEN_VERSIONS
     }
 
-    def "configures GE URL requested via TC config when GE extension is applied via classpath (#jdkCompatibleMavenVersion)"() {
+    def "configures Develocity URL requested via TC config when Develocity extension is applied via classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 
@@ -71,7 +71,7 @@ class UrlConfigurationExtensionApplicationTest extends BaseExtensionApplicationT
         jdkCompatibleMavenVersion << SUPPORTED_MAVEN_VERSIONS
     }
 
-    def "enforces GE URL and allowUntrustedServer in project if enforce url parameter is enabled (#jdkCompatibleMavenVersion)"() {
+    def "enforces Develocity URL and allowUntrustedServer in project if enforce url parameter is enabled (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 

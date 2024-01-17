@@ -105,7 +105,7 @@ The TeamCity configuration parameters can be set on any project and are automati
 
     - `develocityPlugin.develocity.allow-untrusted-server` - allow communication with an untrusted server; set to _true_ if your Develocity instance is using a self-signed certificate
     - `develocityPlugin.develocity.enforce-url` - enforce the configured Develocity URL over a URL configured in the project's build; set to _true_ to enforce publication of build scans to the configured Develocity URL
-    - `develocityPlugin.gradle.plugin-repository.url` - the URL of the repository to use when resolving the GE and CCUD plugins; required if your TeamCity agents are not able to access the Gradle Plugin Portal
+    - `develocityPlugin.gradle.plugin-repository.url` - the URL of the repository to use when resolving the Develocity and CCUD plugins; required if your TeamCity agents are not able to access the Gradle Plugin Portal
     - `develocityPlugin.command-line-build-step.enabled` - enable Develocity integration for _Command Line_ build steps; by default only steps using the _Gradle_ runner are enabled
 
 ##### Example Gradle Configuration

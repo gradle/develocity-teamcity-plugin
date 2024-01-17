@@ -7,7 +7,7 @@ import static org.junit.Assume.assumeTrue
 
 class ServiceMessageExtensionApplicationTest extends BaseExtensionApplicationTest {
 
-    def "build succeeds when service message maven extension is applied to a project without GE in the extension classpath (#jdkCompatibleMavenVersion)"() {
+    def "build succeeds when service message maven extension is applied to a project without Develocity in the extension classpath (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 

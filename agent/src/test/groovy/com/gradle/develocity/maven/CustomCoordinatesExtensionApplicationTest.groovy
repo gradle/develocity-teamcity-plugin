@@ -8,14 +8,14 @@ import static org.junit.Assume.assumeTrue
 
 class CustomCoordinatesExtensionApplicationTest extends BaseExtensionApplicationTest {
 
-    def "does not inject GE extension when not defined in project but matching custom coordinates defined in project (#jdkCompatibleMavenVersion)"() {
+    def "does not inject Develocity extension when not defined in project but matching custom coordinates defined in project (#jdkCompatibleMavenVersion)"() {
         assumeTrue jdkCompatibleMavenVersion.isJvmVersionCompatible()
         assumeTrue GE_URL != null
 
         given:
         def mvnProject = new MavenProject.Configuration(
             geUrl: GE_URL,
-            // using Guava as surrogate since we do not have a custom extension at hand that pulls in the GE Maven extension transitively
+            // using Guava as surrogate since we do not have a custom extension at hand that pulls in the Develocity Maven extension transitively
             customExtension: new GroupArtifactVersion(group: 'com.google.guava', artifact: 'guava', version: '31.1-jre')
         ).buildIn(checkoutDir)
 
@@ -49,7 +49,7 @@ class CustomCoordinatesExtensionApplicationTest extends BaseExtensionApplication
         def mvnProject = new MavenProject.Configuration(
             geUrl: GE_URL,
             geExtensionVersion: GE_EXTENSION_VERSION,
-            // using Guava as surrogate since we do not have a custom extension at hand that pulls in the GE Maven extension transitively
+            // using Guava as surrogate since we do not have a custom extension at hand that pulls in the Develocity Maven extension transitively
             customExtension: new GroupArtifactVersion(group: 'com.google.guava', artifact: 'guava', version: '31.1-jre')
         ).buildIn(checkoutDir)
 
