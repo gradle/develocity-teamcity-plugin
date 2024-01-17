@@ -42,8 +42,8 @@ class DevelocityExtensionApplicationTest extends BaseExtensionApplicationTest {
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         when:
@@ -73,8 +73,8 @@ class DevelocityExtensionApplicationTest extends BaseExtensionApplicationTest {
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         when:
@@ -101,8 +101,8 @@ class DevelocityExtensionApplicationTest extends BaseExtensionApplicationTest {
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:
@@ -137,8 +137,8 @@ class DevelocityExtensionApplicationTest extends BaseExtensionApplicationTest {
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:
@@ -171,8 +171,8 @@ class DevelocityExtensionApplicationTest extends BaseExtensionApplicationTest {
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:

@@ -19,9 +19,9 @@ class UrlConfigurationExtensionApplicationTest extends BaseExtensionApplicationT
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: new URI('https://develocity-server.invalid'),
-                develocityAllowUntrustedServer: true,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: new URI('https://develocity-server.invalid'),
+            develocityAllowUntrustedServer: true,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         when:
@@ -51,9 +51,9 @@ class UrlConfigurationExtensionApplicationTest extends BaseExtensionApplicationT
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityAllowUntrustedServer: true,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityAllowUntrustedServer: true,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         when:
@@ -77,16 +77,16 @@ class UrlConfigurationExtensionApplicationTest extends BaseExtensionApplicationT
 
         given:
         def mvnProject = new MavenProject.Configuration(
-                geUrl: new URI('https://develocity-server.invalid'),
-                geExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            geUrl: new URI('https://develocity-server.invalid'),
+            geExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         ).buildIn(checkoutDir)
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityAllowUntrustedServer: true,
-                develocityEnforceUrl: true,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityAllowUntrustedServer: true,
+            develocityEnforceUrl: true,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         when:

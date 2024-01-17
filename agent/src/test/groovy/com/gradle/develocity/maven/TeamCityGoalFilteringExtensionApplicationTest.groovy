@@ -17,8 +17,8 @@ class TeamCityGoalFilteringExtensionApplicationTest extends BaseExtensionApplica
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:

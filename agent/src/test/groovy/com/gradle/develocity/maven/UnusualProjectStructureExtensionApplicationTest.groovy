@@ -21,7 +21,7 @@ class UnusualProjectStructureExtensionApplicationTest extends BaseExtensionAppli
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:
@@ -57,7 +57,7 @@ class UnusualProjectStructureExtensionApplicationTest extends BaseExtensionAppli
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:
@@ -94,7 +94,7 @@ class UnusualProjectStructureExtensionApplicationTest extends BaseExtensionAppli
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
         )
 
         and:

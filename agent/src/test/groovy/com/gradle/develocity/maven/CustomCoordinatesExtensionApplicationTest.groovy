@@ -21,9 +21,9 @@ class CustomCoordinatesExtensionApplicationTest extends BaseExtensionApplication
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
-                develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
-                develocityExtensionCustomCoordinates: 'com.google.guava:guava',
+            develocityUrl: DEVELOCITY_URL,
+            develocityExtensionVersion: DEVELOCITY_EXTENSION_VERSION,
+            develocityExtensionCustomCoordinates: 'com.google.guava:guava',
         )
 
         when:
@@ -55,7 +55,7 @@ class CustomCoordinatesExtensionApplicationTest extends BaseExtensionApplication
 
         and:
         def gePluginConfig = new TcPluginConfig(
-                develocityUrl: DEVELOCITY_URL,
+            develocityUrl: DEVELOCITY_URL,
             ccudExtensionVersion: CCUD_EXTENSION_VERSION,
             ccudExtensionCustomCoordinates: 'com.google.guava:guava',
         )
