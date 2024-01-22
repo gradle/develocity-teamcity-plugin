@@ -60,6 +60,7 @@ teamcity {
 
             // optional properties
             useSeparateClassloader = true
+            downloadUrl = 'https://github.com/gradle/develocity-teamcity-plugin'
         }
 
         publish {
