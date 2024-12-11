@@ -44,7 +44,7 @@ jobs:
                     TEAMCITY_PLUGIN_PUBLISH_TOKEN: ${{ secrets.TEAMCITY_PLUGIN_PUBLISH_TOKEN }}
                     GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
             -   name: Upload plugin artifact
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 with:
                     name: teamcity-build-scan-plugin
                     path: build/distributions/teamcity-build-scan-plugin-*.zip
