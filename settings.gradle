@@ -7,12 +7,11 @@ plugins {
 def isCI = System.getenv('CI') != null
 
 develocity {
-    server = 'https://etiennestuder.gradle-enterprise.cloud'
+    server = 'https://ge.solutions-team.gradle.com'
 
     buildScan {
         publishing.onlyIf { it.authenticated }
         uploadInBackground = !isCI
-        capture { fileFingerprints = true }
         obfuscation { ipAddresses { addresses -> addresses.collect { address -> '0.0.0.0' } } }
     }
 }

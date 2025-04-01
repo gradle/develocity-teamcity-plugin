@@ -30,20 +30,15 @@ jobs:
             -   name: Setup Gradle
                 uses: gradle/actions/setup-gradle@v4
                 with:
-                    dependency-graph: generate-and-submit
+                    develocity-access-key: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
             -   name: Build and bundle plugin artifact
                 run: ./gradlew clean build -Porg.gradle.java.installations.fromEnv=JAVA_HOME_6_0_119_X64 -PjavaCompilerVersion=6
                 env:
-                    DEVELOCITY_TEST_INSTANCE: https://etiennestuder.gradle-enterprise.cloud
-                    GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
-                    DEVELOCITY_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
+                    DEVELOCITY_TEST_INSTANCE: https://ge.solutions-team.gradle.com
             -   name: Create GitHub release
                 run: ./gradlew githubRelease
                 env:
                     TEAMCITY_PLUGIN_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
-                    DEVELOCITY_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
-                    GITHUB_DEPENDENCY_GRAPH_ENABLED: false
             -   name: Upload plugin artifact
                 uses: actions/upload-artifact@v4
                 with:

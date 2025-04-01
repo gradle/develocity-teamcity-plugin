@@ -27,9 +27,9 @@ jobs:
                     distribution: 'liberica'
             -   name: Setup Gradle
                 uses: gradle/actions/setup-gradle@v4
+                with:
+                    develocity-access-key: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
             -   name: Build and bundle plugin artifact
                 run: ./gradlew clean build -Porg.gradle.java.installations.fromEnv=JAVA_HOME_6_0_119_X64 -PjavaCompilerVersion=6
                 env:
-                    DEVELOCITY_TEST_INSTANCE: ${{ secrets.GE_ACCESS_TOKEN != null && 'https://etiennestuder.gradle-enterprise.cloud' || '' }}
-                    GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN != null && secrets.GE_ACCESS_TOKEN || 'dummy.server=dummy_value' }}
-                    DEVELOCITY_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN != null && secrets.GE_ACCESS_TOKEN || 'dummy.server=dummy_value' }}
+                    DEVELOCITY_TEST_INSTANCE: ${{ secrets.DEVELOCITY_ACCESS_KEY != null && 'https://ge.solutions-team.gradle.com' || '' }}
