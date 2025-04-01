@@ -55,17 +55,17 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
 
     // TeamCity Develocity configuration parameters
 
-    private static final String GRADLE_PLUGIN_REPOSITORY_CONFIG_PARAM = "buildScanPlugin.gradle.plugin-repository.url";
-    private static final String DEVELOCITY_URL_CONFIG_PARAM = "buildScanPlugin.gradle-enterprise.url";
-    private static final String DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM = "buildScanPlugin.gradle-enterprise.allow-untrusted-server";
-    private static final String DEVELOCITY_ENFORCE_URL_CONFIG_PARAM = "buildScanPlugin.gradle-enterprise.enforce-url";
-    private static final String DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM = "buildScanPlugin.gradle-enterprise.plugin.version";
-    private static final String CCUD_PLUGIN_VERSION_CONFIG_PARAM = "buildScanPlugin.ccud.plugin.version";
-    private static final String DEVELOCITY_EXTENSION_VERSION_CONFIG_PARAM = "buildScanPlugin.gradle-enterprise.extension.version";
-    private static final String CCUD_EXTENSION_VERSION_CONFIG_PARAM = "buildScanPlugin.ccud.extension.version";
-    private static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM = "buildScanPlugin.gradle-enterprise.extension.custom.coordinates";
-    private static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "buildScanPlugin.ccud.extension.custom.coordinates";
-    private static final String INSTRUMENT_COMMAND_LINE_RUNNER_CONFIG_PARAM = "buildScanPlugin.command-line-build-step.enabled";
+    private static final String GRADLE_PLUGIN_REPOSITORY_CONFIG_PARAM = "develocityPlugin.gradle.plugin-repository.url";
+    private static final String DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.gradle-enterprise.url";
+    private static final String DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM = "develocityPlugin.gradle-enterprise.allow-untrusted-server";
+    private static final String DEVELOCITY_ENFORCE_URL_CONFIG_PARAM = "develocityPlugin.gradle-enterprise.enforce-url";
+    private static final String DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM = "develocityPlugin.gradle-enterprise.plugin.version";
+    private static final String CCUD_PLUGIN_VERSION_CONFIG_PARAM = "develocityPlugin.ccud.plugin.version";
+    private static final String DEVELOCITY_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.gradle-enterprise.extension.version";
+    private static final String CCUD_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.ccud.extension.version";
+    private static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.gradle-enterprise.extension.custom.coordinates";
+    private static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.ccud.extension.custom.coordinates";
+    private static final String INSTRUMENT_COMMAND_LINE_RUNNER_CONFIG_PARAM = "develocityPlugin.command-line-build-step.enabled";
 
     // Environment variables set to instrument the Gradle build
 

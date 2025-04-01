@@ -7,8 +7,8 @@ import java.util.Map;
 
 public final class TeamCityConfiguration {
 
-    public static final String LOG_PARSING_CONFIG_PARAM = "buildScanPlugin.log-parsing.enabled";
-    public static final String SLACK_WEBHOOK_URL_CONFIG_PARAM = "buildScanPlugin.slack-webhook.url";
+    public static final String LOG_PARSING_CONFIG_PARAM = "develocityPlugin.log-parsing.enabled";
+    public static final String SLACK_WEBHOOK_URL_CONFIG_PARAM = "develocityPlugin.slack-webhook.url";
 
     public final String fullBuildName;
     public final Map<String, String> params;

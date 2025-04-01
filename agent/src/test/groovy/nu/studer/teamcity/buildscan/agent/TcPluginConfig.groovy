@@ -18,37 +18,37 @@ class TcPluginConfig {
     Map<String, String> toConfigParameters() {
         Map<String, String> configProps = [:]
         if (gradlePluginRepositoryUrl) {
-            configProps.put 'buildScanPlugin.gradle.plugin-repository.url', gradlePluginRepositoryUrl.toString()
+            configProps.put 'develocityPlugin.gradle.plugin-repository.url', gradlePluginRepositoryUrl.toString()
         }
         if (develocityUrl) {
-            configProps.put 'buildScanPlugin.gradle-enterprise.url', develocityUrl.toString()
+            configProps.put 'develocityPlugin.gradle-enterprise.url', develocityUrl.toString()
         }
         if (develocityAllowUntrustedServer) {
-            configProps.put 'buildScanPlugin.gradle-enterprise.allow-untrusted-server', 'true'
+            configProps.put 'develocityPlugin.gradle-enterprise.allow-untrusted-server', 'true'
         }
         if (develocityEnforceUrl) {
-            configProps.put 'buildScanPlugin.gradle-enterprise.enforce-url', 'true'
+            configProps.put 'develocityPlugin.gradle-enterprise.enforce-url', 'true'
         }
         if (develocityPluginVersion) {
-            configProps.put 'buildScanPlugin.gradle-enterprise.plugin.version', develocityPluginVersion
+            configProps.put 'develocityPlugin.gradle-enterprise.plugin.version', develocityPluginVersion
         }
         if (ccudPluginVersion) {
-            configProps.put 'buildScanPlugin.ccud.plugin.version', ccudPluginVersion
+            configProps.put 'develocityPlugin.ccud.plugin.version', ccudPluginVersion
         }
         if (develocityExtensionVersion) {
-            configProps.put 'buildScanPlugin.gradle-enterprise.extension.version', develocityExtensionVersion
+            configProps.put 'develocityPlugin.gradle-enterprise.extension.version', develocityExtensionVersion
         }
         if (ccudExtensionVersion) {
-            configProps.put 'buildScanPlugin.ccud.extension.version', ccudExtensionVersion
+            configProps.put 'develocityPlugin.ccud.extension.version', ccudExtensionVersion
         }
         if (develocityExtensionCustomCoordinates) {
-            configProps.put('buildScanPlugin.gradle-enterprise.extension.custom.coordinates', develocityExtensionCustomCoordinates)
+            configProps.put('develocityPlugin.gradle-enterprise.extension.custom.coordinates', develocityExtensionCustomCoordinates)
         }
         if (ccudExtensionCustomCoordinates) {
-            configProps.put('buildScanPlugin.ccud.extension.custom.coordinates', ccudExtensionCustomCoordinates)
+            configProps.put('develocityPlugin.ccud.extension.custom.coordinates', ccudExtensionCustomCoordinates)
         }
         if (enableCommandLineRunner) {
-            configProps.put 'buildScanPlugin.command-line-build-step.enabled', 'true'
+            configProps.put 'develocityPlugin.command-line-build-step.enabled', 'true'
         }
         configProps
     }
