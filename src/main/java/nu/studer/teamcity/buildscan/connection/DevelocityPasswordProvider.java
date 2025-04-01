@@ -9,10 +9,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR;
+import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_ACCESS_KEY_ENV_VAR;
 
 /**
- * This class implements {@link PasswordsProvider} in order to hide the env.GRADLE_ENTERPRISE_ACCESS_KEY secret in the
+ * This class implements {@link PasswordsProvider} in order to hide the env.DEVELOCITY_ACCESS_KEY secret in the
  * parameters output screen
  */
 public final class DevelocityPasswordProvider implements PasswordsProvider {
@@ -21,10 +21,10 @@ public final class DevelocityPasswordProvider implements PasswordsProvider {
     @Override
     public Collection<Parameter> getPasswordParameters(@NotNull SBuild build) {
         Collection<Parameter> passwordParameters = new ArrayList<Parameter>(1);
-        String geAccessKey = build.getParametersProvider().get(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR);
+        String geAccessKey = build.getParametersProvider().get(DEVELOCITY_ACCESS_KEY_ENV_VAR);
 
         if (geAccessKey != null) {
-            Parameter parameter = new SimpleParameter(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR, geAccessKey);
+            Parameter parameter = new SimpleParameter(DEVELOCITY_ACCESS_KEY_ENV_VAR, geAccessKey);
             passwordParameters.add(parameter);
         }
 

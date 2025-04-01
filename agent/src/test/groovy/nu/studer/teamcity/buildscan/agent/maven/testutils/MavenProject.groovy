@@ -85,7 +85,7 @@ final class MavenProject {
 
         private static void setProjectDefinedDevelocityConfiguration(File directory, String geUrl) {
             if (geUrl) {
-                def geConfig = new File(directory, 'gradle-enterprise.xml')
+                def geConfig = new File(directory, 'develocity.xml')
                 geConfig << """<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
             <develocity>
               <server>

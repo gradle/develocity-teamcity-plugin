@@ -14,31 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.ALLOW_UNTRUSTED_SERVER;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.ALLOW_UNTRUSTED_SERVER_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CCUD_EXTENSION_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CCUD_EXTENSION_VERSION_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CCUD_PLUGIN_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CCUD_PLUGIN_VERSION_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CUSTOM_CCUD_EXTENSION_COORDINATES;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CUSTOM_DEVELOCITY_EXTENSION_COORDINATES;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_EXTENSION_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_EXTENSION_VERSION_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_PLUGIN_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_CONNECTION_PROVIDER;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_URL;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_URL_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_PLUGIN_REPOSITORY_URL;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_PLUGIN_REPOSITORY_URL_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.INSTRUMENT_COMMAND_LINE_BUILD_STEP;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.ENFORCE_DEVELOCITY_URL;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.ENFORCE_DEVELOCITY_URL_CONFIG_PARAM;
+import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.*;
 
 /**
  * This implementation of {@link BuildParametersProvider} injects configuration parameters and environment variables
@@ -67,7 +43,7 @@ public final class DevelocityParametersProvider implements BuildParametersProvid
             setParameter(CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM, connectionParams.get(CUSTOM_DEVELOCITY_EXTENSION_COORDINATES), params);
             setParameter(CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM, connectionParams.get(CUSTOM_CCUD_EXTENSION_COORDINATES), params);
             setParameter(INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM, connectionParams.get(INSTRUMENT_COMMAND_LINE_BUILD_STEP), params);
-            setParameter(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR, connectionParams.get(GRADLE_ENTERPRISE_ACCESS_KEY), params);
+            setParameter(DEVELOCITY_ACCESS_KEY_ENV_VAR, connectionParams.get(DEVELOCITY_ACCESS_KEY), params);
             setParameter(ENFORCE_DEVELOCITY_URL_CONFIG_PARAM, connectionParams.get(ENFORCE_DEVELOCITY_URL), params);
         }
         return params;

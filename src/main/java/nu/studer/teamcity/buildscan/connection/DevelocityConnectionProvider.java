@@ -17,19 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.ALLOW_UNTRUSTED_SERVER;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CCUD_EXTENSION_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CCUD_PLUGIN_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CUSTOM_CCUD_EXTENSION_COORDINATES;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.CUSTOM_DEVELOCITY_EXTENSION_COORDINATES;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.ENFORCE_DEVELOCITY_URL;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_EXTENSION_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_PLUGIN_VERSION;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_CONNECTION_PROVIDER;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.DEVELOCITY_URL;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_PLUGIN_REPOSITORY_URL;
-import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.INSTRUMENT_COMMAND_LINE_BUILD_STEP;
+import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.*;
 
 public final class DevelocityConnectionProvider extends OAuthProvider {
 
@@ -78,7 +66,7 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
             description += String.format("* Allow Untrusted Server: %s\n", allowUntrustedServer);
         }
 
-        String geAccessKey = params.get(GRADLE_ENTERPRISE_ACCESS_KEY);
+        String geAccessKey = params.get(DEVELOCITY_ACCESS_KEY);
         if (geAccessKey != null) {
             description += String.format("* Develocity Access Key: %s\n", "******");
         }
@@ -172,9 +160,9 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
     public PropertiesProcessor getPropertiesProcessor() {
         return properties -> {
             List<InvalidProperty> errors = new ArrayList<>();
-            String accessKey = properties.get(GRADLE_ENTERPRISE_ACCESS_KEY);
+            String accessKey = properties.get(DEVELOCITY_ACCESS_KEY);
             if (accessKey != null && !DevelocityAccessKeyValidator.isValid(accessKey)) {
-                errors.add(new InvalidProperty(GRADLE_ENTERPRISE_ACCESS_KEY, "Invalid access key"));
+                errors.add(new InvalidProperty(DEVELOCITY_ACCESS_KEY, "Invalid access key"));
             }
             return errors;
         };

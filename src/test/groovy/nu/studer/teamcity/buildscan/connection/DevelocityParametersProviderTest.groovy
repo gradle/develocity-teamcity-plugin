@@ -9,31 +9,7 @@ import jetbrains.buildServer.serverSide.parameters.BuildParametersProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static DevelocityConnectionConstants.ALLOW_UNTRUSTED_SERVER
-import static DevelocityConnectionConstants.ALLOW_UNTRUSTED_SERVER_CONFIG_PARAM
-import static DevelocityConnectionConstants.CCUD_EXTENSION_VERSION
-import static DevelocityConnectionConstants.CCUD_EXTENSION_VERSION_CONFIG_PARAM
-import static DevelocityConnectionConstants.CCUD_PLUGIN_VERSION
-import static DevelocityConnectionConstants.CCUD_PLUGIN_VERSION_CONFIG_PARAM
-import static DevelocityConnectionConstants.CUSTOM_CCUD_EXTENSION_COORDINATES
-import static DevelocityConnectionConstants.CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM
-import static DevelocityConnectionConstants.CUSTOM_DEVELOCITY_EXTENSION_COORDINATES
-import static DevelocityConnectionConstants.CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM
-import static DevelocityConnectionConstants.DEVELOCITY_EXTENSION_VERSION
-import static DevelocityConnectionConstants.DEVELOCITY_EXTENSION_VERSION_CONFIG_PARAM
-import static DevelocityConnectionConstants.DEVELOCITY_PLUGIN_VERSION
-import static DevelocityConnectionConstants.DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM
-import static DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY
-import static DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR
-import static DevelocityConnectionConstants.DEVELOCITY_CONNECTION_PROVIDER
-import static DevelocityConnectionConstants.DEVELOCITY_URL
-import static DevelocityConnectionConstants.DEVELOCITY_URL_CONFIG_PARAM
-import static DevelocityConnectionConstants.GRADLE_PLUGIN_REPOSITORY_URL
-import static DevelocityConnectionConstants.GRADLE_PLUGIN_REPOSITORY_URL_CONFIG_PARAM
-import static DevelocityConnectionConstants.INSTRUMENT_COMMAND_LINE_BUILD_STEP
-import static DevelocityConnectionConstants.INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM
-import static DevelocityConnectionConstants.ENFORCE_DEVELOCITY_URL
-import static DevelocityConnectionConstants.ENFORCE_DEVELOCITY_URL_CONFIG_PARAM
+import static DevelocityConnectionConstants.*
 
 @Unroll
 class DevelocityParametersProviderTest extends Specification {
@@ -124,7 +100,7 @@ class DevelocityParametersProviderTest extends Specification {
         CUSTOM_DEVELOCITY_EXTENSION_COORDINATES | CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM | '1.0.0'
         CUSTOM_CCUD_EXTENSION_COORDINATES  | CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM  | '1.0.0'
         INSTRUMENT_COMMAND_LINE_BUILD_STEP | INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM | 'true'
-        GRADLE_ENTERPRISE_ACCESS_KEY       | GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR            | 'develocity.example.com=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        DEVELOCITY_ACCESS_KEY | DEVELOCITY_ACCESS_KEY_ENV_VAR | 'develocity.example.com=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     }
 
     def "gets configuration from first descriptor"() {

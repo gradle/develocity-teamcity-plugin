@@ -34,10 +34,10 @@
 </tr>
 
 <tr>
-    <td><label for="${keys.gradleEnterpriseAccessKey}">Develocity Access Key:</label></td>
+    <td><label for="${keys.develocityAccessKey}">Develocity Access Key:</label></td>
     <td>
-        <props:passwordProperty name="${keys.gradleEnterpriseAccessKey}" className="longField"/>
-        <span class="error" id="error_${keys.gradleEnterpriseAccessKey}"></span>
+        <props:passwordProperty name="${keys.develocityAccessKey}" className="longField"/>
+        <span class="error" id="error_${keys.develocityAccessKey}"></span>
         <span class="smallNote">The access key for authenticating with the Develocity server.</span>
     </td>
 </tr>
@@ -52,7 +52,7 @@
 
 <tr>
     <td colspan="2">
-        <div class="smallNoteAttention">The access key must be in the <b>&lt;server host name&gt;=&lt;access key&gt;</b> format. For more details please refer to the <a href="https://docs.gradle.com/enterprise/gradle-plugin/#manual_access_key_configuration" target="_blank">documentation</a>.</div>
+        <div class="smallNoteAttention">The access key must be in the <b>&lt;server host name&gt;=&lt;access key&gt;</b> format. For more details please refer to the <a href="https://docs.gradle.com/develocity/gradle-plugin/#manual_access_key_configuration" target="_blank">documentation</a>.</div>
     </td>
 </tr>
 

@@ -61,7 +61,7 @@ class DevelocityConnectionProviderTest extends Specification {
     def "description includes includes placeholder value for access key"() {
         given:
         OAuthConnectionDescriptor connection = Stub()
-        connection.getParameters() >> [(GRADLE_ENTERPRISE_ACCESS_KEY): 'server=secret']
+        connection.getParameters() >> [(DEVELOCITY_ACCESS_KEY): 'server=secret']
 
         when:
         def description = connectionProvider.describeConnection(connection)
@@ -72,13 +72,13 @@ class DevelocityConnectionProviderTest extends Specification {
 
     def "returns validation error if access key is invalid"() {
         when:
-        def errors = connectionProvider.propertiesProcessor.process([(GRADLE_ENTERPRISE_ACCESS_KEY): accessKey])
+        def errors = connectionProvider.propertiesProcessor.process([(DEVELOCITY_ACCESS_KEY): accessKey])
 
         then:
         errors.size() == 1
 
         and:
-        def error = errors.find { it.propertyName == GRADLE_ENTERPRISE_ACCESS_KEY }
+        def error = errors.find { it.propertyName == DEVELOCITY_ACCESS_KEY }
         error != null
         error.invalidReason == 'Invalid access key'
 
@@ -88,7 +88,7 @@ class DevelocityConnectionProviderTest extends Specification {
 
     def "does not return validation error if access key is valid or absent"() {
         when:
-        def errors = connectionProvider.propertiesProcessor.process(accessKey != null ? [(GRADLE_ENTERPRISE_ACCESS_KEY): accessKey] : [:])
+        def errors = connectionProvider.propertiesProcessor.process(accessKey != null ? [(DEVELOCITY_ACCESS_KEY): accessKey] : [:])
 
         then:
         errors.isEmpty()

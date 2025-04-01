@@ -62,15 +62,15 @@
           class="nu.studer.teamcity.buildscan.internal.CustomDataStorageBuildScanCleaner">
     </bean>
 
-    <bean id="gradleEnterpriseConnectionProvider"
+    <bean id="develocityConnectionProvider"
           class="nu.studer.teamcity.buildscan.connection.DevelocityConnectionProvider">
     </bean>
 
-    <bean id="gradleEnterpriseParametersProvider"
+    <bean id="develocityParametersProvider"
           class="nu.studer.teamcity.buildscan.connection.DevelocityParametersProvider">
     </bean>
 
-    <bean id="gradleEnterprisePasswordProvider"
+    <bean id="develocityPasswordProvider"
           class="nu.studer.teamcity.buildscan.connection.DevelocityPasswordProvider">
     </bean>
 

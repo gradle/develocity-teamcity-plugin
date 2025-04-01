@@ -7,17 +7,17 @@ public final class DevelocityConnectionConstants {
     // These are used to correlate data set by the user in the connection dialog to the descriptor parameters available in the Project Feature Descriptor Parameters
 
     public static final String GRADLE_PLUGIN_REPOSITORY_URL = "gradlePluginRepositoryUrl";
-    public static final String DEVELOCITY_URL = "gradleEnterpriseUrl";
+    public static final String DEVELOCITY_URL = "develocityUrl";
     public static final String ALLOW_UNTRUSTED_SERVER = "allowUntrustedServzer";
-    public static final String DEVELOCITY_PLUGIN_VERSION = "gradleEnterprisePluginVersion";
+    public static final String DEVELOCITY_PLUGIN_VERSION = "develocityPluginVersion";
     public static final String CCUD_PLUGIN_VERSION = "commonCustomUserDataPluginVersion";
-    public static final String DEVELOCITY_EXTENSION_VERSION = "gradleEnterpriseExtensionVersion";
+    public static final String DEVELOCITY_EXTENSION_VERSION = "develocityExtensionVersion";
     public static final String CCUD_EXTENSION_VERSION = "commonCustomUserDataExtensionVersion";
-    public static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES = "customGradleEnterpriseExtensionCoordinates";
+    public static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES = "customDevelocityExtensionCoordinates";
     public static final String CUSTOM_CCUD_EXTENSION_COORDINATES = "customCommonCustomUserDataExtensionCoordinates";
     public static final String INSTRUMENT_COMMAND_LINE_BUILD_STEP = "instrumentCommandLineBuildStep";
-    public static final String GRADLE_ENTERPRISE_ACCESS_KEY = "gradleEnterpriseAccessKey";
-    public static final String ENFORCE_DEVELOCITY_URL = "enforceGradleEnterpriseUrl";
+    public static final String DEVELOCITY_ACCESS_KEY = "develocityAccessKey";
+    public static final String ENFORCE_DEVELOCITY_URL = "enforceDevelocityUrl";
 
     // Constants defined by the BuildScanServiceMessageInjector
     // This connection sets these values as build parameters so that they can be picked up by the BuildScanServiceMessageInjector
@@ -32,7 +32,7 @@ public final class DevelocityConnectionConstants {
     public static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.develocity.extension.custom.coordinates";
     public static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.ccud.extension.custom.coordinates";
     public static final String INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM = "develocityPlugin.command-line-build-step.enabled";
-    public static final String GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR = "env.GRADLE_ENTERPRISE_ACCESS_KEY";
+    public static final String DEVELOCITY_ACCESS_KEY_ENV_VAR = "env.DEVELOCITY_ACCESS_KEY";
     public static final String ENFORCE_DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.develocity.enforce-url";
 
     public static final String DEVELOCITY_CONNECTION_PROVIDER = "develocity-connection-provider";
@@ -79,8 +79,8 @@ public final class DevelocityConnectionConstants {
         return INSTRUMENT_COMMAND_LINE_BUILD_STEP;
     }
 
-    public String getGradleEnterpriseAccessKey() {
-        return GRADLE_ENTERPRISE_ACCESS_KEY;
+    public String getDevelocityAccessKey() {
+        return DEVELOCITY_ACCESS_KEY;
     }
 
     public String getEnforceDevelocityUrl() {
