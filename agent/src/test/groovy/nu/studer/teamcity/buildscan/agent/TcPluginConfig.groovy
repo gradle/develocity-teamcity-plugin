@@ -21,28 +21,28 @@ class TcPluginConfig {
             configProps.put 'develocityPlugin.gradle.plugin-repository.url', gradlePluginRepositoryUrl.toString()
         }
         if (develocityUrl) {
-            configProps.put 'develocityPlugin.gradle-enterprise.url', develocityUrl.toString()
+            configProps.put 'develocityPlugin.develocity.url', develocityUrl.toString()
         }
         if (develocityAllowUntrustedServer) {
-            configProps.put 'develocityPlugin.gradle-enterprise.allow-untrusted-server', 'true'
+            configProps.put 'develocityPlugin.develocity.allow-untrusted-server', 'true'
         }
         if (develocityEnforceUrl) {
-            configProps.put 'develocityPlugin.gradle-enterprise.enforce-url', 'true'
+            configProps.put 'develocityPlugin.develocity.enforce-url', 'true'
         }
         if (develocityPluginVersion) {
-            configProps.put 'develocityPlugin.gradle-enterprise.plugin.version', develocityPluginVersion
+            configProps.put 'develocityPlugin.develocity.plugin.version', develocityPluginVersion
         }
         if (ccudPluginVersion) {
             configProps.put 'develocityPlugin.ccud.plugin.version', ccudPluginVersion
         }
         if (develocityExtensionVersion) {
-            configProps.put 'develocityPlugin.gradle-enterprise.extension.version', develocityExtensionVersion
+            configProps.put 'develocityPlugin.develocity.extension.version', develocityExtensionVersion
         }
         if (ccudExtensionVersion) {
             configProps.put 'develocityPlugin.ccud.extension.version', ccudExtensionVersion
         }
         if (develocityExtensionCustomCoordinates) {
-            configProps.put('develocityPlugin.gradle-enterprise.extension.custom.coordinates', develocityExtensionCustomCoordinates)
+            configProps.put('develocityPlugin.develocity.extension.custom.coordinates', develocityExtensionCustomCoordinates)
         }
         if (ccudExtensionCustomCoordinates) {
             configProps.put('develocityPlugin.ccud.extension.custom.coordinates', ccudExtensionCustomCoordinates)
