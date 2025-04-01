@@ -32,4 +32,4 @@ buildCache {
 include ':agent'
 include ':agent:service-message-maven-extension'
 
-rootProject.name = 'teamcity-build-scan-plugin'
+rootProject.name = 'develocity-teamcity-plugin'

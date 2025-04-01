@@ -45,5 +45,5 @@ jobs:
             -   name: Upload plugin artifact
                 uses: actions/upload-artifact@v4
                 with:
-                    name: teamcity-build-scan-plugin
-                    path: build/distributions/teamcity-build-scan-plugin-*.zip
+                    name: develocity-teamcity-plugin
+                    path: build/distributions/develocity-teamcity-plugin-*.zip
