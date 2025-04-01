@@ -59,7 +59,7 @@ If the first two mechanisms will not work for your Maven build configurations, y
 
 ## Develocity connectivity
 
-You can ad-hoc connect Gradle and Maven builds to an existing Develocity instance by automatically injecting the [Develocity Gradle plugin](https://docs.gradle.com/enterprise/gradle-plugin/) and the [Develocity Maven extension](https://docs.gradle.com/enterprise/maven-extension/) when these builds are run via TeamCity's _Gradle_ or _Maven_ runner. If a Gradle or Maven build is run via TeamCity's _Command Line_ runner the auto-injection can be opted in to, too. If a given build is already connected to Develocity, the auto-injection is skipped.
+You can ad-hoc connect Gradle and Maven builds to an existing Develocity instance by automatically injecting the [Develocity Gradle plugin](https://docs.gradle.com/develocity/gradle-plugin/) and the [Develocity Maven extension](https://docs.gradle.com/develocity/maven-extension/) when these builds are run via TeamCity's _Gradle_ or _Maven_ runner. If a Gradle or Maven build is run via TeamCity's _Command Line_ runner the auto-injection can be opted in to, too. If a given build is already connected to Develocity, the auto-injection is skipped.
 
 The same auto-injection behavior is available for the [Common Custom User Data Gradle plugin](https://github.com/gradle/common-custom-user-data-gradle-plugin) and the [Common Custom User Data Maven extension](https://github.com/gradle/common-custom-user-data-maven-extension).
 
@@ -98,7 +98,7 @@ The TeamCity configuration parameters can be set on any project and are automati
 1. In TeamCity, on the build configuration for which you want to apply Develocity, create three configuration parameters:
 
    - `develocityPlugin.develocity.url` - the URL of the Develocity instance to which to publish build scans
-   - `develocityPlugin.develocity.plugin.version` - the version of the [Develocity Gradle plugin](https://docs.gradle.com/enterprise/gradle-plugin/) to apply
+   - `develocityPlugin.develocity.plugin.version` - the version of the [Develocity Gradle plugin](https://docs.gradle.com/develocity/gradle-plugin/) to apply
    - `develocityPlugin.ccud.plugin.version` - the version of the [Common Custom User Data Gradle plugin](https://github.com/gradle/common-custom-user-data-gradle-plugin) to apply (optional)
 
 2. If required, provide additional configuration parameters for your environment (optional):
@@ -117,7 +117,7 @@ The TeamCity configuration parameters can be set on any project and are automati
 1. In TeamCity, on the build configuration for which you want to integrate Develocity, create three configuration parameters:
 
    - `develocityPlugin.develocity.url` - the URL of the Develocity instance to which to publish build scans
-   - `develocityPlugin.develocity.extension.version` - the version of the [Develocity Maven extension](https://docs.gradle.com/enterprise/maven-extension/) to apply
+   - `develocityPlugin.develocity.extension.version` - the version of the [Develocity Maven extension](https://docs.gradle.com/develocity/maven-extension/) to apply
    - `develocityPlugin.ccud.extension.version` - the version of the [Common Custom User Data Maven extension](https://github.com/gradle/common-custom-user-data-maven-extension) to apply (optional)
 
 2. If required, provide additional configuration parameters for your environment (optional):
@@ -160,11 +160,11 @@ The configured version of the Develocity Gradle plugin and the Develocity Maven 
 
 ### Gradle builds
 
-The compatibility of the specified version of the Develocity Gradle plugin with Develocity can be found [here](https://docs.gradle.com/enterprise/compatibility/#gradle_enterprise_gradle_plugin). The compatibility of the optionally specified version of the Common Custom User Data Gradle plugin with the Develocity Gradle plugin can be found [here](https://github.com/gradle/common-custom-user-data-gradle-plugin#version-compatibility).
+The compatibility of the specified version of the Develocity Gradle plugin with Develocity can be found [here](https://docs.gradle.com/develocity/compatibility/#develocity_gradle_plugin). The compatibility of the optionally specified version of the Common Custom User Data Gradle plugin with the Develocity Gradle plugin can be found [here](https://github.com/gradle/common-custom-user-data-gradle-plugin#version-compatibility).
 
 ### Maven builds
 
-The compatibility of the specified version of the Develocity Maven extension with Develocity can be found [here](https://docs.gradle.com/enterprise/compatibility/#gradle_enterprise_compatibility_2). The compatibility of the optionally specified version of the Common Custom User Data Maven extension with the Develocity Maven extension can be found [here](https://github.com/gradle/common-custom-user-data-maven-extension#version-compatibility).
+The compatibility of the specified version of the Develocity Maven extension with Develocity can be found [here](https://docs.gradle.com/develocity/compatibility/#maven_extension). The compatibility of the optionally specified version of the Common Custom User Data Maven extension with the Develocity Maven extension can be found [here](https://github.com/gradle/common-custom-user-data-maven-extension#version-compatibility).
 
 For Maven builds, the version of the Develocity Maven extension automatically applied by the TeamCity Build Scan plugin is currently bundled by the plugin and cannot be configured. This will change in a future version of this plugin.
 
