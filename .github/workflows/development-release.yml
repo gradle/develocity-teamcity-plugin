@@ -34,7 +34,7 @@ jobs:
             -   name: Build and bundle plugin artifact
                 run: ./gradlew clean build -Porg.gradle.java.installations.fromEnv=JAVA_HOME_6_0_119_X64 -PjavaCompilerVersion=6
                 env:
-                    GRADLE_ENTERPRISE_TEST_INSTANCE: https://etiennestuder.gradle-enterprise.cloud
+                    GRADLE_ENTERPRISE_TEST_INSTANCE: https://scans.gradle.com
                     GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
             -   name: Create GitHub release
                 run: ./gradlew githubRelease
@@ -45,5 +45,5 @@ jobs:
             -   name: Upload plugin artifact
                 uses: actions/upload-artifact@v4
                 with:
-                    name: teamcity-build-scan-plugin
-                    path: build/distributions/teamcity-build-scan-plugin-*.zip
+                    name: develocity-teamcity-plugin
+                    path: build/distributions/develocity-teamcity-plugin-*.zip
