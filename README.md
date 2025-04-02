@@ -156,7 +156,7 @@ The version of the Develocity Gradle plugin and the Develocity Maven extension t
 
 ## Develocity connectivity
 
-The configured version of the Develocity Gradle plugin and the Develocity Maven extension that get automatically applied by the Develocity TeamCity plugin must be compatbile with the version of the Develocity server that the build is connecting to.
+The configured version of the Develocity Gradle plugin and the Develocity Maven extension that get automatically applied by the Develocity TeamCity plugin must be compatible with the version of the Develocity server that the build is connecting to.
 
 ### Gradle builds
 
