@@ -33,6 +33,7 @@ public final class DevelocityConnectionConstants {
     public static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.ccud.extension.custom.coordinates";
     public static final String INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM = "develocityPlugin.command-line-build-step.enabled";
     public static final String DEVELOCITY_ACCESS_KEY_ENV_VAR = "env.DEVELOCITY_ACCESS_KEY";
+    public static final String GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR = "env.GRADLE_ENTERPRISE_ACCESS_KEY";
     public static final String ENFORCE_DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.develocity.enforce-url";
 
     public static final String DEVELOCITY_CONNECTION_PROVIDER = "develocity-connection-provider";

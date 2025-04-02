@@ -6,6 +6,7 @@ import jetbrains.buildServer.serverSide.parameters.types.PasswordsProvider
 import spock.lang.Specification
 
 import static DevelocityConnectionConstants.DEVELOCITY_ACCESS_KEY_ENV_VAR
+import static nu.studer.teamcity.buildscan.connection.DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR
 
 class DevelocityPasswordProviderTest extends Specification {
 
@@ -21,10 +22,7 @@ class DevelocityPasswordProviderTest extends Specification {
         sBuild.getParametersProvider() >> parametersProvider
     }
 
-    def "returns no elements when env.DEVELOCITY_ACCESS_KEY is not set"() {
-        given:
-        parametersProvider.get(DEVELOCITY_ACCESS_KEY_ENV_VAR) >> null
-
+    def "returns no elements when no access key variables are set"() {
         when:
         def passwordParameters = passwordsProvider.getPasswordParameters(sBuild)
 
@@ -32,18 +30,22 @@ class DevelocityPasswordProviderTest extends Specification {
         passwordParameters.isEmpty()
     }
 
-    def "returns env.DEVELOCITY_ACCESS_KEY element when env.DEVELOCITY_ACCESS_KEY is set"() {
+    def "returns password parameters when access key variables are set"() {
         given:
         def value = "develocity.example.com=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         parametersProvider.get(DEVELOCITY_ACCESS_KEY_ENV_VAR) >> value
+        parametersProvider.get(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR) >> value
 
         when:
         def passwordParameters = passwordsProvider.getPasswordParameters(sBuild)
 
         then:
-        def keyParams = passwordParameters.findAll { it.name == DEVELOCITY_ACCESS_KEY_ENV_VAR }
-        keyParams.size() == 1
-        keyParams[0].value == value
+        passwordParameters.collect {
+            it.name
+        } == [DEVELOCITY_ACCESS_KEY_ENV_VAR, GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR]
+        passwordParameters.forEach {
+            assert it.value == value
+        }
     }
 
 }

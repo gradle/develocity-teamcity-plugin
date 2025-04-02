@@ -101,6 +101,7 @@ class DevelocityParametersProviderTest extends Specification {
         CUSTOM_CCUD_EXTENSION_COORDINATES  | CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM  | '1.0.0'
         INSTRUMENT_COMMAND_LINE_BUILD_STEP | INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM | 'true'
         DEVELOCITY_ACCESS_KEY | DEVELOCITY_ACCESS_KEY_ENV_VAR | 'develocity.example.com=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        DEVELOCITY_ACCESS_KEY | GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR | 'develocity.example.com=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     }
 
     def "gets configuration from first descriptor"() {

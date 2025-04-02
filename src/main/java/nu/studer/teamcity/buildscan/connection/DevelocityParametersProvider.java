@@ -45,6 +45,8 @@ public final class DevelocityParametersProvider implements BuildParametersProvid
             setParameter(INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM, connectionParams.get(INSTRUMENT_COMMAND_LINE_BUILD_STEP), params);
             setParameter(DEVELOCITY_ACCESS_KEY_ENV_VAR, connectionParams.get(DEVELOCITY_ACCESS_KEY), params);
             setParameter(ENFORCE_DEVELOCITY_URL_CONFIG_PARAM, connectionParams.get(ENFORCE_DEVELOCITY_URL), params);
+            // Set the legacy access key variable to support legacy GE plugins
+            setParameter(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR, connectionParams.get(DEVELOCITY_ACCESS_KEY), params);
         }
         return params;
     }
