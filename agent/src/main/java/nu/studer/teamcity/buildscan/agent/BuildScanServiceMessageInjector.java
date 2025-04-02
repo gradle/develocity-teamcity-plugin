@@ -49,9 +49,9 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
 
     private static final String COMMAND_LINE_RUNNER = "simpleRunner";
 
-    // Gradle TeamCity Build Scan plugin
+    // Develocity TeamCity plugin
 
-    private static final String GRADLE_BUILDSCAN_TEAMCITY_PLUGIN = "GRADLE_BUILDSCAN_TEAMCITY_PLUGIN";
+    private static final String DEVELOCITY_TEAMCITY_PLUGIN = "DEVELOCITY_TEAMCITY_PLUGIN";
 
     // TeamCity Develocity configuration parameters
 
@@ -132,7 +132,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
         String initScriptParam = "--init-script " + initScript.getAbsolutePath();
         addGradleCmdParam(initScriptParam, runner);
 
-        addEnvVar(GRADLE_BUILDSCAN_TEAMCITY_PLUGIN, "1", runner);
+        addEnvVar(DEVELOCITY_TEAMCITY_PLUGIN, "1", runner);
     }
 
     private void instrumentMavenRunner(@NotNull BuildRunnerContext runner) {
@@ -140,7 +140,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
         String invocationArgs = getMavenInvocationArgs(runner);
         addMavenCmdParam(invocationArgs, runner);
 
-        addEnvVar(GRADLE_BUILDSCAN_TEAMCITY_PLUGIN, "1", runner);
+        addEnvVar(DEVELOCITY_TEAMCITY_PLUGIN, "1", runner);
     }
 
     private void instrumentCommandLineRunner(@NotNull BuildRunnerContext runner) {
@@ -153,7 +153,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
         String invocationArgs = getMavenInvocationArgs(runner);
         appendEnvVar("MAVEN_OPTS", invocationArgs, runner);
 
-        addEnvVar(GRADLE_BUILDSCAN_TEAMCITY_PLUGIN, "1", runner);
+        addEnvVar(DEVELOCITY_TEAMCITY_PLUGIN, "1", runner);
     }
 
     private void addGradleInitScriptEnvVars(@NotNull File initScript, @NotNull BuildRunnerContext runner) {
