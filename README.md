@@ -1,5 +1,5 @@
-<p align="left">
-  <a href="https://github.com/etiennestuder/teamcity-build-scan-plugin/actions?query=workflow%3A%22Verify+Build%22"><img src="https://github.com/etiennestuder/teamcity-build-scan-plugin/workflows/Verify%20Build/badge.svg"></a>
+<p>
+  <a href="https://github.com/gradle/develocity-teamcity-plugin/actions?query=workflow%3A%22Verify+Build%22"><img src="https://github.com/gradle/develocity-teamcity-plugin/workflows/Verify%20Build/badge.svg"></a>
 </p>
 
 develocity-teamcity-plugin
