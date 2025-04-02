@@ -14,7 +14,7 @@ class BuildScanCollector {
     }
 
     private static String generateBuildScanLifeCycleMessage(def attribute) {
-        return "##teamcity[nu.studer.teamcity.buildscan.buildScanLifeCycle '${escape(attribute as String)}']" as String
+        return "##teamcity[com.gradle.develocity.buildScanLifeCycle '${escape(attribute as String)}']" as String
     }
 
     private static String escape(String value) {

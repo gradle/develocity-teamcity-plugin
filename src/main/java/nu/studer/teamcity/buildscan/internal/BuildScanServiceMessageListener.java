@@ -18,7 +18,7 @@ public final class BuildScanServiceMessageListener implements ServiceMessageTran
     private static final Logger LOGGER = Logger.getLogger("jetbrains.buildServer.BUILDSCAN");
 
     // values need to be kept in sync with build-scan-init.gradle
-    private static final String BUILD_SCAN_SERVICE_MESSAGE_NAME = "nu.studer.teamcity.buildscan.buildScanLifeCycle";
+    private static final String BUILD_SCAN_SERVICE_MESSAGE_NAME = "com.gradle.develocity.buildScanLifeCycle";
     private static final String BUILD_SCAN_SERVICE_STARTED_MESSAGE_ARGUMENT = "BUILD_STARTED";
     private static final String BUILD_SCAN_SERVICE_URL_MESSAGE_ARGUMENT_PREFIX = "BUILD_SCAN_URL:";
 
