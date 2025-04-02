@@ -89,24 +89,24 @@ abstract class BaseExtensionApplicationTest extends Specification {
     }
 
     void outputContainsTeamCityServiceMessageBuildStarted(String output) {
-        def serviceMsg = "##teamcity[nu.studer.teamcity.buildscan.buildScanLifeCycle 'BUILD_STARTED']"
+        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_STARTED']"
         assert output.contains(serviceMsg)
         assert 1 == output.count(serviceMsg)
     }
 
     void outputMissesTeamCityServiceMessageBuildStarted(String output) {
-        def serviceMsg = "##teamcity[nu.studer.teamcity.buildscan.buildScanLifeCycle 'BUILD_STARTED']"
+        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_STARTED']"
         assert !output.contains(serviceMsg)
     }
 
     void outputContainsTeamCityServiceMessageBuildScanUrl(String output) {
-        def serviceMsg = "##teamcity[nu.studer.teamcity.buildscan.buildScanLifeCycle 'BUILD_SCAN_URL:${DEVELOCITY_URL}/s/"
+        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_SCAN_URL:${DEVELOCITY_URL}/s/"
         assert output.contains(serviceMsg)
         assert 1 == output.count(serviceMsg)
     }
 
     void outputMissesTeamCityServiceMessageBuildScanUrl(String output) {
-        def serviceMsg = "##teamcity[nu.studer.teamcity.buildscan.buildScanLifeCycle 'BUILD_SCAN_URL:${DEVELOCITY_URL}/s/"
+        def serviceMsg = "##teamcity[com.gradle.develocity.buildScanLifeCycle 'BUILD_SCAN_URL:${DEVELOCITY_URL}/s/"
         assert !output.contains(serviceMsg)
     }
 
