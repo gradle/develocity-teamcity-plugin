@@ -69,15 +69,16 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
 
     // Environment variables set to instrument the Gradle build
 
-    private static final String GRADLE_PLUGIN_REPOSITORY_VAR = "GRADLE_PLUGIN_REPOSITORY_URL";
-    private static final String DEVELOCITY_URL_VAR = "DEVELOCITY_URL";
-    private static final String DEVELOCITY_ALLOW_UNTRUSTED_VAR = "DEVELOCITY_ALLOW_UNTRUSTED_SERVER";
-    private static final String DEVELOCITY_ENFORCE_URL_VAR = "DEVELOCITY_ENFORCE_URL";
-    private static final String DEVELOCITY_PLUGIN_VERSION_VAR = "DEVELOCITY_PLUGIN_VERSION";
-    private static final String CCUD_PLUGIN_VERSION_VAR = "DEVELOCITY_CCUD_PLUGIN_VERSION";
+    private static final String GRADLE_PLUGIN_REPOSITORY_VAR = "DEVELOCITY_INJECTION_PLUGIN_REPOSITORY_URL";
+    private static final String DEVELOCITY_URL_VAR = "DEVELOCITY_INJECTION_URL";
+    private static final String DEVELOCITY_ALLOW_UNTRUSTED_VAR = "DEVELOCITY_INJECTION_ALLOW_UNTRUSTED_SERVER";
+    private static final String DEVELOCITY_ENFORCE_URL_VAR = "DEVELOCITY_INJECTION_ENFORCE_URL";
+    private static final String DEVELOCITY_PLUGIN_VERSION_VAR = "DEVELOCITY_INJECTION_DEVELOCITY_PLUGIN_VERSION";
+    private static final String CCUD_PLUGIN_VERSION_VAR = "DEVELOCITY_INJECTION_CCUD_PLUGIN_VERSION";
     private static final String DEVELOCITY_INJECTION_ENABLED_VAR = "DEVELOCITY_INJECTION_ENABLED";
     private static final String INIT_SCRIPT_NAME_VAR = "DEVELOCITY_INJECTION_INIT_SCRIPT_NAME";
-    private static final String DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE_VAR = "DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE";
+    private static final String DEVELOCITY_INJECTION_CUSTOM_VALUE_VAR = "DEVELOCITY_INJECTION_CUSTOM_VALUE";
+    private static final String DEVELOCITY_INJECTION_DEBUG_VAR = "DEVELOCITY_INJECTION_DEBUG";
 
     // Maven system properties passed on the CLI to a Maven build
 
@@ -167,7 +168,8 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
         // the init-script is inactive by default, supply the script name env var to activate it
         addEnvVar(INIT_SCRIPT_NAME_VAR, initScript.getName(), runner);
         addEnvVar(DEVELOCITY_INJECTION_ENABLED_VAR, "true", runner);
-        addEnvVar(DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE_VAR, "TeamCity", runner);
+        addEnvVar(DEVELOCITY_INJECTION_CUSTOM_VALUE_VAR, "TeamCity", runner);
+        addEnvVar(DEVELOCITY_INJECTION_DEBUG_VAR, "true", runner);
     }
 
     private File getInitScriptInAgentTempDir(BuildRunnerContext runner) {

@@ -266,15 +266,16 @@ class BaseInitScriptTest extends Specification {
     // for TestKit versions that don't support environment variables, map those vars to system properties
     private static List<String> mapEnvVarsToSystemProps(Map<String, String> envVars) {
         def mapping = [
-            DEVELOCITY_URL                        : "develocity.url",
-            DEVELOCITY_ALLOW_UNTRUSTED_SERVER     : "develocity.allow-untrusted-server",
-            DEVELOCITY_ENFORCE_URL                : "develocity.enforce-url",
-            DEVELOCITY_PLUGIN_VERSION             : "develocity.plugin.version",
-            DEVELOCITY_CCUD_PLUGIN_VERSION        : "develocity.ccud-plugin.version",
-            GRADLE_PLUGIN_REPOSITORY_URL          : "gradle.plugin-repository.url",
-            DEVELOCITY_INJECTION_INIT_SCRIPT_NAME : "develocity.injection.init-script-name",
-            DEVELOCITY_INJECTION_ENABLED          : "develocity.injection-enabled",
-            DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE: "develocity.auto-injection.custom-value"
+            DEVELOCITY_INJECTION_URL                      : "develocity-injection.url",
+            DEVELOCITY_INJECTION_ALLOW_UNTRUSTED_SERVER   : "develocity-injection.allow-untrusted-server",
+            DEVELOCITY_INJECTION_ENFORCE_URL              : "develocity-injection.enforce-url",
+            DEVELOCITY_INJECTION_DEVELOCITY_PLUGIN_VERSION: "develocity-injection.develocity-plugin.version",
+            DEVELOCITY_INJECTION_CCUD_PLUGIN_VERSION      : "develocity-injection.ccud-plugin.version",
+            DEVELOCITY_INJECTION_PLUGIN_REPOSITORY_URL    : "develocity-injection.plugin-repository.url",
+            DEVELOCITY_INJECTION_INIT_SCRIPT_NAME         : "develocity-injection.init-script-name",
+            DEVELOCITY_INJECTION_ENABLED                  : "develocity-injection.enabled",
+            DEVELOCITY_INJECTION_CUSTOM_VALUE             : "develocity-injection.custom-value",
+            DEVELOCITY_INJECTION_DEBUG                    : "develocity-injection.debug"
         ]
 
         return envVars.entrySet().stream().map(e -> {
