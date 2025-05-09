@@ -132,16 +132,6 @@ The TeamCity configuration parameters can be set on any project and are automati
 
 </details>
 
-## Slack notifications (experimental)
-
-1. In Slack, create a webhook and keep track of the created URL.
-
-2. In TeamCity, on the build configuration for which you want to be notified about published Build Scans, create a configuration parameter with name `develocityPlugin.slack-webhook.url` and the value being the URL of the webhook created in step #1.
-
-3. Trigger your Gradle builds with Build Scans enabled.
-
-4. Find a notification about the published Build Scans in the Slack channel configured in the webhook.
-
 # Compatibility
 
 ## Build Scan links surfacing

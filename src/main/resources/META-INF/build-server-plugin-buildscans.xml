@@ -9,12 +9,6 @@
           destroy-method="unregister">
     </bean>
 
-    <bean id="buildScanBuildServerListener"
-          class="com.gradle.develocity.teamcity.BuildScanBuildServerListener"
-          init-method="register"
-          destroy-method="unregister">
-    </bean>
-
     <bean id="buildScanCrumbSummaryExtension"
           class="com.gradle.develocity.teamcity.BuildScanCrumbSummaryExtension"
           init-method="register"
@@ -43,10 +37,6 @@
 
     <bean id="buildScanDisplayArbiter"
           class="com.gradle.develocity.teamcity.internal.DefaultBuildScanDisplayArbiter"/>
-
-    <bean id="slackIntegration"
-          class="com.gradle.develocity.teamcity.internal.slack.SlackIntegration"
-          destroy-method="shutdown"/>
 
     <bean id="buildScanAdminPage"
           class="com.gradle.develocity.teamcity.internal.cleanup.BuildScanAdminPage"
