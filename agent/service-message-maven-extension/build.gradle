@@ -10,7 +10,7 @@ ext {
 
 tasks.register('buildExtension', Exec).configure {
     def toolchain = project.getExtensions().getByType(JavaToolchainService.class)
-    def launcherFor = toolchain.launcherFor { it.languageVersion.set(JavaLanguageVersion.of(8)) }
+    def launcherFor = toolchain.launcherFor { it.languageVersion.set(JavaLanguageVersion.of(11)) }
     def cmdLineArgProvider = new JavaLauncherCommandLineArgumentProvider(javaLauncher: launcherFor.get())
 
     inputs.file('pom.xml')

@@ -36,7 +36,7 @@ final class MavenProject {
 
         private static File setPomFile(File directory, String name) {
             def pom = new File(directory, name)
-            pom << getClass().getResourceAsStream("/pom.xml")
+            pom << MavenProject.class.getResourceAsStream("/pom.xml")
             pom
         }
 

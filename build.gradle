@@ -22,11 +22,14 @@ def snapshotVersion = RELEASE ? '' : buildTimestamp
 group = 'com.gradle.develocity'
 version = baseVersion + (snapshotVersion ? "-$snapshotVersion" : '')
 
-def teamCityApiVersion = '2020.1'
+def teamCityApiVersion = '2020.2'
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.13.1'
     implementation 'com.google.guava:guava:33.4.8-jre'
+    implementation('io.github.dsibilio:badge-maker:1.0.4') {
+        exclude group: 'org.slf4j'
+    } // 2.x requires Java 17
 
     provided "org.jetbrains.teamcity:oauth:$teamCityApiVersion"
 
@@ -37,7 +40,7 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
+        languageVersion = JavaLanguageVersion.of(11)
         vendor = JvmVendorSpec.BELLSOFT
     }
 }
@@ -75,8 +78,8 @@ teamcity {
         baseHomeDir = mkdir('.teamcity/servers')
         baseDataDir = mkdir('.teamcity/data')
 
-        teamcity2022_4 {
-            version = '2022.04'
+        teamcity2025_3 {
+            version = '2025.03.1'
             serverOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
             agentOptions '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006'
         }

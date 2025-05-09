@@ -1,6 +1,8 @@
 package com.gradle.develocity.teamcity
 
+import spock.lang.Requires
 import spock.lang.Specification
+import spock.util.environment.OperatingSystem
 
 class BuildScanReferenceTest extends Specification {
 
@@ -32,6 +34,22 @@ class BuildScanReferenceTest extends Specification {
 
         where:
         url << ["http://scans.gradle.com/s/htyg3re5", "https://scans.gradle.com/s/htyg3re5"]
+    }
+
+    @Requires(value = { OperatingSystem.current.isLinux() })
+    def "can render badge"() {
+        given:
+        def buildScanReference = new BuildScanReference("myId", "https://scans.gradle.com/s/htyg3re5")
+        def reference = BuildScanReference.getResource("Badge.html").text
+
+        when:
+        def badge = buildScanReference.buildScanBadge
+        then:
+        reference == """\
+            <html><body>
+            <img src="${badge}">
+            </body></html>
+            """.stripIndent(true)
     }
 
 }

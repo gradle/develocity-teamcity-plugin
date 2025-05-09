@@ -30,6 +30,16 @@ public final class DefaultBuildScanDisplayArbiter implements BuildScanDisplayArb
             return false;
         }
 
+        if (!hasSupportedRunner(buildType)) return false;
+
+        return !buildScanLookup.getBuildScansForBuild(build).isEmpty();
+    }
+
+    @Override
+    public boolean hasSupportedRunner(SBuildType buildType) {
+        if (buildType == null) {
+            return false;
+        }
         // note that buildType.getBuildRunners() returns all configured runners while
         // buildType.getRunnerTypes() returns only the runners that are enabled,
         // since the buildType instance always reflects the _current_ configuration rather
@@ -40,11 +50,7 @@ public final class DefaultBuildScanDisplayArbiter implements BuildScanDisplayArb
             .map(r -> r.getRunType().getType())
             .filter(BUILD_SCAN_SUPPORTING_RUNNER_TYPES::contains)
             .count();
-        if (matchingRunners == 0) {
-            return false;
-        }
-
-        return !buildScanLookup.getBuildScansForBuild(build).isEmpty();
+        return matchingRunners > 0;
     }
 
 }

@@ -4,11 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-autowire="constructor">
 
-    <bean id="buildScanViewBuildTab"
-          class="com.gradle.develocity.teamcity.BuildScanViewBuildTab"
-          destroy-method="unregister">
-    </bean>
-
     <bean id="buildScanBuildServerListener"
           class="com.gradle.develocity.teamcity.BuildScanBuildServerListener"
           init-method="register"
@@ -16,9 +11,7 @@
     </bean>
 
     <bean id="buildScanCrumbSummaryExtension"
-          class="com.gradle.develocity.teamcity.BuildScanCrumbSummaryExtension"
-          init-method="register"
-          destroy-method="unregister">
+          class="com.gradle.develocity.teamcity.BuildScanController">
     </bean>
 
     <bean id="cachedBuildScanLookup" primary="true"
