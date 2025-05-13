@@ -27,8 +27,8 @@
         </dependency>
         <dependency>
             <groupId>com.gradle</groupId>
-            <artifactId>gradle-enterprise-maven-extension</artifactId>
-            <version>1.20.1</version><!-- The last version before POM relocation to develocity-maven-extension -->
+            <artifactId>develocity-maven-extension</artifactId>
+            <version>2.0</version><!-- The last version before POM relocation to develocity-maven-extension -->
             <scope>provided</scope>
         </dependency>
         <dependency>
