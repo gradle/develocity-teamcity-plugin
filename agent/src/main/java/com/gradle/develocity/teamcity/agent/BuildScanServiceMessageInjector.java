@@ -56,6 +56,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
     // TeamCity Develocity configuration parameters
 
     private static final String GRADLE_PLUGIN_REPOSITORY_CONFIG_PARAM = "develocityPlugin.gradle.plugin-repository.url";
+    private static final String GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM = "develocityPlugin.gradle.plugin.capture-file-fingerprints";
     private static final String DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.develocity.url";
     private static final String DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM = "develocityPlugin.develocity.allow-untrusted-server";
     private static final String DEVELOCITY_ENFORCE_URL_CONFIG_PARAM = "develocityPlugin.develocity.enforce-url";
@@ -66,11 +67,13 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
     private static final String CCUD_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.ccud.extension.version";
     private static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.develocity.extension.custom.coordinates";
     private static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.ccud.extension.custom.coordinates";
+    private static final String DEVELOCITY_EXTENSION_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM = "develocityPlugin.develocity.extension.capture-file-fingerprints";
     private static final String INSTRUMENT_COMMAND_LINE_RUNNER_CONFIG_PARAM = "develocityPlugin.command-line-build-step.enabled";
 
     // Environment variables set to instrument the Gradle build
 
     private static final String GRADLE_PLUGIN_REPOSITORY_VAR = "DEVELOCITY_INJECTION_PLUGIN_REPOSITORY_URL";
+    private static final String GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_VAR = "DEVELOCITY_INJECTION_CAPTURE_FILE_FINGERPRINTS";
     private static final String DEVELOCITY_URL_VAR = "DEVELOCITY_INJECTION_URL";
     private static final String DEVELOCITY_ALLOW_UNTRUSTED_VAR = "DEVELOCITY_INJECTION_ALLOW_UNTRUSTED_SERVER";
     private static final String DEVELOCITY_ENFORCE_URL_VAR = "DEVELOCITY_INJECTION_ENFORCE_URL";
@@ -88,6 +91,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
     private static final String DEVELOCITY_EXTENSION_UPLOAD_IN_BACKGROUND_MAVEN_PROPERTY = "develocity.uploadInBackground";
     private static final String GRADLE_ENTERPRISE_URL_MAVEN_PROPERTY = "gradle.enterprise.url";
     private static final String GRADLE_ENTERPRISE_ALLOW_UNTRUSTED_MAVEN_PROPERTY = "gradle.enterprise.allowUntrustedServer";
+    private static final String DEVELOCITY_CAPTURE_FILE_FINGERPRINTS_PROPERTY = "develocity.scan.captureFileFingerprints";
     private static final MavenCoordinates DEVELOCITY_EXTENSION_MAVEN_COORDINATES = new MavenCoordinates("com.gradle", "develocity-maven-extension");
     private static final MavenCoordinates GRADLE_ENTERPRISE_EXTENSION_MAVEN_COORDINATES = new MavenCoordinates("com.gradle", "gradle-enterprise-maven-extension");
     private static final MavenCoordinates CCUD_EXTENSION_MAVEN_COORDINATES = new MavenCoordinates("com.gradle", "common-custom-user-data-maven-extension");
@@ -160,6 +164,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
 
     private void addGradleInitScriptEnvVars(@NotNull File initScript, @NotNull BuildRunnerContext runner) {
         addEnvVarIfSet(GRADLE_PLUGIN_REPOSITORY_CONFIG_PARAM, GRADLE_PLUGIN_REPOSITORY_VAR, runner);
+        addEnvVar(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_VAR, Boolean.toString(getBooleanConfigParam(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM, runner)), runner);
         addEnvVarIfSet(DEVELOCITY_URL_CONFIG_PARAM, DEVELOCITY_URL_VAR, runner);
         addEnvVarIfSet(DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_VAR, runner);
         addEnvVarIfSet(DEVELOCITY_ENFORCE_URL_CONFIG_PARAM, DEVELOCITY_ENFORCE_URL_VAR, runner);
@@ -240,6 +245,7 @@ public class BuildScanServiceMessageInjector extends AgentLifeCycleAdapter {
                     addSysPropIfSet(DEVELOCITY_URL_CONFIG_PARAM, DEVELOCITY_URL_MAVEN_PROPERTY, sysProps, runner);
                     addSysPropIfSet(DEVELOCITY_ALLOW_UNTRUSTED_CONFIG_PARAM, DEVELOCITY_ALLOW_UNTRUSTED_MAVEN_PROPERTY, sysProps, runner);
                     addSysProp(DEVELOCITY_EXTENSION_UPLOAD_IN_BACKGROUND_MAVEN_PROPERTY, "false", sysProps);
+                    addSysProp(DEVELOCITY_CAPTURE_FILE_FINGERPRINTS_PROPERTY, Boolean.toString(getBooleanConfigParam(DEVELOCITY_EXTENSION_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM, runner)), sysProps);
                 } else if (develocityUrl != null && Boolean.parseBoolean(getOptionalConfigParam(DEVELOCITY_ENFORCE_URL_CONFIG_PARAM, runner))) {
                     // set Develocity properties for extensions 1.21+
                     addSysPropIfSet(DEVELOCITY_URL_CONFIG_PARAM, DEVELOCITY_URL_MAVEN_PROPERTY, sysProps, runner);

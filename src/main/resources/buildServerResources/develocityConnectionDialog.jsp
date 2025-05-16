@@ -106,6 +106,14 @@
     </td>
 </tr>
 
+<tr class="advancedSetting">
+    <td><label for="${keys.gradlePluginCaptureFileFingerprints}">Capture File Fingerprints:</label></td>
+    <td>
+        <props:checkboxProperty name="${keys.gradlePluginCaptureFileFingerprints}"/>
+        <span class="smallNote">Enables capturing the paths and content hashes of each individual input file.</span>
+    </td>
+</tr>
+
 <tr class="groupingTitle">
     <td colspan="2">Maven Settings</td>
 </tr>
@@ -139,6 +147,14 @@
     <td>
         <props:textProperty name="${keys.customCommonCustomUserDataExtensionCoordinates}" className="longField"/>
         <span class="smallNote">The coordinates of a custom Common Custom User Data Maven Extension or of a custom extension that has a transitive dependency on it.</span>
+    </td>
+</tr>
+
+<tr class="advancedSetting">
+    <td><label for="${keys.extensionCaptureFileFingerprints}">Capture File Fingerprints::</label></td>
+    <td>
+        <props:checkboxProperty name="${keys.extensionCaptureFileFingerprints}"/>
+        <span class="smallNote">Enables capturing the paths and content hashes of each individual input file.</span>
     </td>
 </tr>
 

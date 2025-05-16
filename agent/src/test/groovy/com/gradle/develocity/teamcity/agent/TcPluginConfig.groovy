@@ -7,12 +7,14 @@ class TcPluginConfig {
     boolean develocityAllowUntrustedServer
     boolean enableInjection
     boolean develocityEnforceUrl
+    boolean develocityPluginFileFingerprints
     String develocityPluginVersion
     String ccudPluginVersion
     String develocityExtensionVersion
     String ccudExtensionVersion
     String develocityExtensionCustomCoordinates
     String ccudExtensionCustomCoordinates
+    boolean develocityExtensionFileFingerprints
     boolean enableCommandLineRunner
 
     // configuration params as they would be set by the user in the TeamCity configuration
@@ -54,6 +56,9 @@ class TcPluginConfig {
         if (enableCommandLineRunner) {
             configProps.put 'develocityPlugin.command-line-build-step.enabled', 'true'
         }
+        configProps.put 'develocityPlugin.gradle.plugin.capture-file-fingerprints', develocityPluginFileFingerprints as String
+        configProps.put 'develocityPlugin.develocity.extension.capture-file-fingerprints', develocityExtensionFileFingerprints as String
+
         configProps
     }
 

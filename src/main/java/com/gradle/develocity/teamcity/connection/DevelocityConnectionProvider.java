@@ -103,6 +103,11 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
             description += String.format("* Gradle Plugin Repository URL: %s\n", gradlePluginRepositoryUrl);
         }
 
+        String gradlePluginCaptureFileFingerprints = params.get(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS);
+        if (gradlePluginCaptureFileFingerprints != null) {
+            description += String.format("* Gradle Plugin Capture Task Input Files: %s\n", gradlePluginCaptureFileFingerprints);
+        }
+
         description += "\nMaven Settings:\n";
 
         String geExtensionVersion = params.get(DEVELOCITY_EXTENSION_VERSION);
@@ -123,6 +128,11 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
         String customCcudExtensionCoordinates = params.get(CUSTOM_CCUD_EXTENSION_COORDINATES);
         if (customCcudExtensionCoordinates != null) {
             description += String.format("* Common Custom User Data Maven Extension Custom Coordinates: %s\n", customCcudExtensionCoordinates);
+        }
+
+        String extensionCaptureFileFingerprints = params.get(EXTENSION_CAPTURE_FILE_FINGERPRINTS);
+        if (extensionCaptureFileFingerprints != null) {
+            description += String.format("* Extension Capture Goal Input Files: %s\n", extensionCaptureFileFingerprints);
         }
 
         description += "\nTeamCity Build Steps Settings:\n";

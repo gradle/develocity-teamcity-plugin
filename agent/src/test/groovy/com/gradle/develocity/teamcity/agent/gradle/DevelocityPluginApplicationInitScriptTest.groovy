@@ -196,7 +196,7 @@ class DevelocityPluginApplicationInitScriptTest extends BaseInitScriptTest {
 
         then:
         outputContainsDevelocityPluginApplicationViaInitScript(result, jdkCompatibleGradleVersion.gradleVersion)
-        outputContainsDevelocityConnectionInfo(result, mockScansServer.address.toString(), true)
+        outputContainsDevelocityConnectionInfo(result, mockScansServer.address.toString(), true, false)
         outputMissesCcudPluginApplicationViaInitScript(result)
         outputContainsPluginRepositoryInfo(result, 'https://plugins.gradle.org/m2')
 
@@ -254,7 +254,7 @@ class DevelocityPluginApplicationInitScriptTest extends BaseInitScriptTest {
 
         then:
         outputContainsDevelocityPluginApplicationViaInitScript(result, jdkCompatibleGradleVersion.gradleVersion)
-        outputContainsDevelocityConnectionInfo(result, mockScansServer.address.toString(), false)
+        outputContainsDevelocityConnectionInfo(result, mockScansServer.address.toString(), false, false)
         outputMissesCcudPluginApplicationViaInitScript(result)
         outputContainsPluginRepositoryInfo(result, 'https://plugins.grdev.net/m2')
 
@@ -391,6 +391,30 @@ class DevelocityPluginApplicationInitScriptTest extends BaseInitScriptTest {
         jdkCompatibleGradleVersion << GRADLE_VERSIONS_CONFIGURATION_CACHE_COMPATIBLE.findAll { it.gradleVersion >= GradleVersion.version('7.2') }
     }
 
+    def "configures file fingerprints via TC config when Develocity plugin is applied by the init script (#jdkCompatibleGradleVersion)"() {
+        assumeTrue jdkCompatibleGradleVersion.isJvmVersionCompatible()
+
+        when:
+        def develocityPluginConfig = new TcPluginConfig(
+            enableInjection: true,
+            develocityUrl: mockScansServer.address,
+            develocityPluginFileFingerprints: true,
+            develocityPluginVersion: DEVELOCITY_PLUGIN_VERSION
+        )
+        def result = run(jdkCompatibleGradleVersion.gradleVersion, develocityPluginConfig)
+
+        then:
+        outputContainsDevelocityPluginApplicationViaInitScript(result, jdkCompatibleGradleVersion.gradleVersion)
+        outputContainsDevelocityConnectionInfo(result, mockScansServer.address.toString(), false, true)
+
+        and:
+        outputContainsTeamCityServiceMessageBuildStarted(result)
+        outputContainsTeamCityServiceMessageBuildScanUrl(result)
+
+        where:
+        jdkCompatibleGradleVersion << GRADLE_VERSIONS_3_0_AND_HIGHER
+    }
+
     void outputContainsDevelocityPluginApplicationViaInitScript(BuildResult result, GradleVersion gradleVersion, String pluginVersion = DEVELOCITY_PLUGIN_VERSION) {
         def pluginApplicationLogMsgGradle4 = "Applying com.gradle.scan.plugin.BuildScanPlugin with version 1.16 via init script"
         def pluginApplicationLogMsgDevelocity = "Applying com.gradle.develocity.agent.gradle.DevelocityPlugin with version ${pluginVersion} via init script"
@@ -419,8 +443,8 @@ class DevelocityPluginApplicationInitScriptTest extends BaseInitScriptTest {
         assert !result.output.contains(pluginApplicationLogMsg)
     }
 
-    void outputContainsDevelocityConnectionInfo(BuildResult result, String geUrl, boolean geAllowUntrustedServer) {
-        def geConnectionInfo = "Connection to Develocity: $geUrl, allowUntrustedServer: $geAllowUntrustedServer"
+    void outputContainsDevelocityConnectionInfo(BuildResult result, String geUrl, boolean geAllowUntrustedServer, boolean captureFileFingerprints) {
+        def geConnectionInfo = "Connection to Develocity: $geUrl, allowUntrustedServer: $geAllowUntrustedServer, captureFileFingerprints: $captureFileFingerprints"
         assert result.output.contains(geConnectionInfo)
         assert 1 == result.output.count(geConnectionInfo)
     }

@@ -63,6 +63,7 @@ public final class DevelocityParametersProvider implements BuildParametersProvid
                     setParameter(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR, token, params);
                 }
                 setParameter(GRADLE_PLUGIN_REPOSITORY_URL_CONFIG_PARAM, connectionParams.get(GRADLE_PLUGIN_REPOSITORY_URL), params);
+                setParameter(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM, connectionParams.get(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS), params);
                 setParameter(DEVELOCITY_URL_CONFIG_PARAM, connectionParams.get(DEVELOCITY_URL), params);
                 setParameter(ALLOW_UNTRUSTED_SERVER_CONFIG_PARAM, allowUntrustedServer, params);
                 setParameter(DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM, connectionParams.get(DEVELOCITY_PLUGIN_VERSION), params);
@@ -71,6 +72,7 @@ public final class DevelocityParametersProvider implements BuildParametersProvid
                 setParameter(CCUD_EXTENSION_VERSION_CONFIG_PARAM, connectionParams.get(CCUD_EXTENSION_VERSION), params);
                 setParameter(CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM, connectionParams.get(CUSTOM_DEVELOCITY_EXTENSION_COORDINATES), params);
                 setParameter(CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM, connectionParams.get(CUSTOM_CCUD_EXTENSION_COORDINATES), params);
+                setParameter(DEVELOCITY_EXTENSION_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM, connectionParams.get(EXTENSION_CAPTURE_FILE_FINGERPRINTS), params);
                 setParameter(INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM, connectionParams.get(INSTRUMENT_COMMAND_LINE_BUILD_STEP), params);
                 setParameter(ENABLE_INJECTION_CONFIG_PARAM, connectionParams.get(ENABLE_INJECTION), params);
                 setParameter(ENFORCE_DEVELOCITY_URL_CONFIG_PARAM, connectionParams.get(ENFORCE_DEVELOCITY_URL), params);

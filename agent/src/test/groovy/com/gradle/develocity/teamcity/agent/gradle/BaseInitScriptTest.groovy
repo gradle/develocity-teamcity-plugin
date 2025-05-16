@@ -63,7 +63,7 @@ class BaseInitScriptTest extends Specification {
         GRADLE_VERSIONS_2_AND_HIGHER - [GRADLE_2_6, GRADLE_2_14]
 
     static final List<JdkCompatibleGradleVersion> GRADLE_VERSIONS_3_5_AND_HIGHER =
-            GRADLE_VERSIONS_3_0_AND_HIGHER - [GRADLE_3_0]
+        GRADLE_VERSIONS_3_0_AND_HIGHER - [GRADLE_3_0]
 
     static final List<JdkCompatibleGradleVersion> GRADLE_VERSIONS_4_AND_HIGHER =
         GRADLE_VERSIONS_3_5_AND_HIGHER - [GRADLE_3_5]
@@ -275,7 +275,8 @@ class BaseInitScriptTest extends Specification {
             DEVELOCITY_INJECTION_INIT_SCRIPT_NAME         : "develocity-injection.init-script-name",
             DEVELOCITY_INJECTION_ENABLED                  : "develocity-injection.enabled",
             DEVELOCITY_INJECTION_CUSTOM_VALUE             : "develocity-injection.custom-value",
-            DEVELOCITY_INJECTION_DEBUG                    : "develocity-injection.debug"
+            DEVELOCITY_INJECTION_DEBUG                    : "develocity-injection.debug",
+            DEVELOCITY_INJECTION_CAPTURE_FILE_FINGERPRINTS: "develocity-injection.capture-file-fingerprints"
         ]
 
         return envVars.entrySet().stream().map(e -> {

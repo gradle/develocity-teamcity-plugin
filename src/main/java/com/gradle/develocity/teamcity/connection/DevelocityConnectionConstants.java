@@ -7,6 +7,7 @@ public final class DevelocityConnectionConstants {
     // These are used to correlate data set by the user in the connection dialog to the descriptor parameters available in the Project Feature Descriptor Parameters
 
     public static final String GRADLE_PLUGIN_REPOSITORY_URL = "gradlePluginRepositoryUrl";
+    public static final String GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS = "gradlePluginCaptureFileFingerprints";
     public static final String DEVELOCITY_URL = "develocityUrl";
     public static final String ALLOW_UNTRUSTED_SERVER = "allowUntrustedServzer";
     public static final String DEVELOCITY_PLUGIN_VERSION = "develocityPluginVersion";
@@ -15,6 +16,7 @@ public final class DevelocityConnectionConstants {
     public static final String CCUD_EXTENSION_VERSION = "commonCustomUserDataExtensionVersion";
     public static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES = "customDevelocityExtensionCoordinates";
     public static final String CUSTOM_CCUD_EXTENSION_COORDINATES = "customCommonCustomUserDataExtensionCoordinates";
+    public static final String EXTENSION_CAPTURE_FILE_FINGERPRINTS = "extensionCaptureFileFingerprints";
     public static final String INSTRUMENT_COMMAND_LINE_BUILD_STEP = "instrumentCommandLineBuildStep";
     public static final String DEVELOCITY_ACCESS_KEY = "develocityAccessKey";
     public static final String DEVELOCITY_ACCESS_TOKEN_EXPIRY = "develocityAccessTokenExpiry";
@@ -25,6 +27,7 @@ public final class DevelocityConnectionConstants {
     // This connection sets these values as build parameters so that they can be picked up by the BuildScanServiceMessageInjector
 
     public static final String GRADLE_PLUGIN_REPOSITORY_URL_CONFIG_PARAM = "develocityPlugin.gradle.plugin-repository.url";
+    public static final String GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM = "develocityPlugin.gradle.plugin.capture-file-fingerprints";
     public static final String DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.develocity.url";
     public static final String ALLOW_UNTRUSTED_SERVER_CONFIG_PARAM = "develocityPlugin.develocity.allow-untrusted-server";
     public static final String DEVELOCITY_PLUGIN_VERSION_CONFIG_PARAM = "develocityPlugin.develocity.plugin.version";
@@ -33,6 +36,7 @@ public final class DevelocityConnectionConstants {
     public static final String CCUD_EXTENSION_VERSION_CONFIG_PARAM = "develocityPlugin.ccud.extension.version";
     public static final String CUSTOM_DEVELOCITY_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.develocity.extension.custom.coordinates";
     public static final String CUSTOM_CCUD_EXTENSION_COORDINATES_CONFIG_PARAM = "develocityPlugin.ccud.extension.custom.coordinates";
+    public static final String DEVELOCITY_EXTENSION_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM = "develocityPlugin.develocity.extension.capture-file-fingerprints";
     public static final String INSTRUMENT_COMMAND_LINE_BUILD_STEP_CONFIG_PARAM = "develocityPlugin.command-line-build-step.enabled";
     public static final String DEVELOCITY_ACCESS_KEY_ENV_VAR = "env.DEVELOCITY_ACCESS_KEY";
     public static final String GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR = "env.GRADLE_ENTERPRISE_ACCESS_KEY";
@@ -45,6 +49,10 @@ public final class DevelocityConnectionConstants {
 
     public String getGradlePluginRepositoryUrl() {
         return GRADLE_PLUGIN_REPOSITORY_URL;
+    }
+
+    public String getGradlePluginCaptureFileFingerprints() {
+        return GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS;
     }
 
     public String getDevelocityUrl() {
@@ -77,6 +85,10 @@ public final class DevelocityConnectionConstants {
 
     public String getCustomCommonCustomUserDataExtensionCoordinates() {
         return CUSTOM_CCUD_EXTENSION_COORDINATES;
+    }
+
+    public String getExtensionCaptureFileFingerprints() {
+        return EXTENSION_CAPTURE_FILE_FINGERPRINTS;
     }
 
     public String getInstrumentCommandLineBuildStep() {
