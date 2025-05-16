@@ -9,13 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static com.gradle.develocity.teamcity.connection.DevelocityConnectionConstants.DEVELOCITY_ACCESS_KEY_ENV_VAR;
-import static com.gradle.develocity.teamcity.connection.DevelocityConnectionConstants.GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR;
-
 import com.google.common.base.Strings;
 
+import static com.gradle.develocity.teamcity.connection.DevelocityConnectionConstants.*;
+
 /**
- * This class implements {@link PasswordsProvider} in order to hide the env.DEVELOCITY_ACCESS_KEY secret in the
+ * This class implements {@link PasswordsProvider} in order to hide the Develocity secrets in the
  * parameters output screen
  */
 public final class DevelocityPasswordProvider implements PasswordsProvider {
@@ -26,6 +25,8 @@ public final class DevelocityPasswordProvider implements PasswordsProvider {
         Collection<Parameter> passwordParameters = new ArrayList<Parameter>(1);
         maybeAddPasswordParameter(build, DEVELOCITY_ACCESS_KEY_ENV_VAR, passwordParameters);
         maybeAddPasswordParameter(build, GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR, passwordParameters);
+        maybeAddPasswordParameter(build, GRADLE_PLUGIN_REPOSITORY_USERNAME_ENV_VAR, passwordParameters);
+        maybeAddPasswordParameter(build, GRADLE_PLUGIN_REPOSITORY_PASSWORD_ENV_VAR, passwordParameters);
 
         return passwordParameters;
     }

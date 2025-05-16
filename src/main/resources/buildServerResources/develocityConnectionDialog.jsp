@@ -106,6 +106,24 @@
     </td>
 </tr>
 
+<tr>
+    <td><label for="${keys.gradlePluginRepositoryUsername}">Gradle Plugin Repository Username:</label></td>
+    <td>
+        <props:textProperty name="${keys.gradlePluginRepositoryUsername}" className="longField"/>
+        <span class="error" id="error_${keys.gradlePluginRepositoryUsername}"></span>
+        <span class="smallNote">The username to log in to a custom Gradle Plugin repository.</span>
+    </td>
+</tr>
+
+<tr>
+    <td><label for="${keys.gradlePluginRepositoryPassword}">Gradle Plugin Repository Password:</label></td>
+    <td>
+        <props:passwordProperty name="${keys.gradlePluginRepositoryPassword}" className="longField"/>
+        <span class="error" id="error_${keys.gradlePluginRepositoryPassword}"></span>
+        <span class="smallNote">The password to log in to a custom Gradle Plugin repository.</span>
+    </td>
+</tr>
+
 <tr class="advancedSetting">
     <td><label for="${keys.gradlePluginCaptureFileFingerprints}">Capture File Fingerprints:</label></td>
     <td>

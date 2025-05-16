@@ -63,6 +63,8 @@ public final class DevelocityParametersProvider implements BuildParametersProvid
                     setParameter(GRADLE_ENTERPRISE_ACCESS_KEY_ENV_VAR, token, params);
                 }
                 setParameter(GRADLE_PLUGIN_REPOSITORY_URL_CONFIG_PARAM, connectionParams.get(GRADLE_PLUGIN_REPOSITORY_URL), params);
+                setParameter(GRADLE_PLUGIN_REPOSITORY_USERNAME_ENV_VAR, connectionParams.get(GRADLE_PLUGIN_REPOSITORY_USERNAME), params);
+                setParameter(GRADLE_PLUGIN_REPOSITORY_PASSWORD_ENV_VAR, connectionParams.get(GRADLE_PLUGIN_REPOSITORY_PASSWORD), params);
                 setParameter(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM, connectionParams.get(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS), params);
                 setParameter(DEVELOCITY_URL_CONFIG_PARAM, connectionParams.get(DEVELOCITY_URL), params);
                 setParameter(ALLOW_UNTRUSTED_SERVER_CONFIG_PARAM, allowUntrustedServer, params);

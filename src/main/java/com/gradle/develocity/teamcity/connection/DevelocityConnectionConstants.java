@@ -7,6 +7,8 @@ public final class DevelocityConnectionConstants {
     // These are used to correlate data set by the user in the connection dialog to the descriptor parameters available in the Project Feature Descriptor Parameters
 
     public static final String GRADLE_PLUGIN_REPOSITORY_URL = "gradlePluginRepositoryUrl";
+    public static final String GRADLE_PLUGIN_REPOSITORY_USERNAME = "gradlePluginRepositoryUsername";
+    public static final String GRADLE_PLUGIN_REPOSITORY_PASSWORD = "gradlePluginRepositoryPassword";
     public static final String GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS = "gradlePluginCaptureFileFingerprints";
     public static final String DEVELOCITY_URL = "develocityUrl";
     public static final String ALLOW_UNTRUSTED_SERVER = "allowUntrustedServzer";
@@ -27,6 +29,8 @@ public final class DevelocityConnectionConstants {
     // This connection sets these values as build parameters so that they can be picked up by the BuildScanServiceMessageInjector
 
     public static final String GRADLE_PLUGIN_REPOSITORY_URL_CONFIG_PARAM = "develocityPlugin.gradle.plugin-repository.url";
+    public static final String GRADLE_PLUGIN_REPOSITORY_USERNAME_ENV_VAR = "env.DEVELOCITY_INJECTION_PLUGIN_REPOSITORY_USERNAME";
+    public static final String GRADLE_PLUGIN_REPOSITORY_PASSWORD_ENV_VAR = "env.DEVELOCITY_INJECTION_PLUGIN_REPOSITORY_PASSWORD";
     public static final String GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS_CONFIG_PARAM = "develocityPlugin.gradle.plugin.capture-file-fingerprints";
     public static final String DEVELOCITY_URL_CONFIG_PARAM = "develocityPlugin.develocity.url";
     public static final String ALLOW_UNTRUSTED_SERVER_CONFIG_PARAM = "develocityPlugin.develocity.allow-untrusted-server";
@@ -49,6 +53,14 @@ public final class DevelocityConnectionConstants {
 
     public String getGradlePluginRepositoryUrl() {
         return GRADLE_PLUGIN_REPOSITORY_URL;
+    }
+
+    public String getGradlePluginRepositoryUsername() {
+        return GRADLE_PLUGIN_REPOSITORY_USERNAME;
+    }
+
+    public String getGradlePluginRepositoryPassword() {
+        return GRADLE_PLUGIN_REPOSITORY_PASSWORD;
     }
 
     public String getGradlePluginCaptureFileFingerprints() {

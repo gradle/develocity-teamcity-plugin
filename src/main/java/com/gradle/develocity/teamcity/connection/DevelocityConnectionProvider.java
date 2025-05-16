@@ -103,6 +103,16 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
             description += String.format("* Gradle Plugin Repository URL: %s\n", gradlePluginRepositoryUrl);
         }
 
+        String gradlePluginRepositoryUsername = params.get(GRADLE_PLUGIN_REPOSITORY_USERNAME);
+        if (gradlePluginRepositoryUsername != null) {
+            description += String.format("* Gradle Plugin Repository Username: %s\n", "******");
+        }
+
+        String gradlePluginRepositoryPassword = params.get(GRADLE_PLUGIN_REPOSITORY_PASSWORD);
+        if (gradlePluginRepositoryPassword != null) {
+            description += String.format("* Gradle Plugin Repository Password: %s\n", "******");
+        }
+
         String gradlePluginCaptureFileFingerprints = params.get(GRADLE_PLUGIN_CAPTURE_FILE_FINGERPRINTS);
         if (gradlePluginCaptureFileFingerprints != null) {
             description += String.format("* Gradle Plugin Capture Task Input Files: %s\n", gradlePluginCaptureFileFingerprints);
