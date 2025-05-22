@@ -127,6 +127,11 @@ void enableDevelocityInjection() {
     def CCUD_PLUGIN_ID = 'com.gradle.common-custom-user-data-gradle-plugin'
     def CCUD_PLUGIN_CLASS = 'com.gradle.CommonCustomUserDataGradlePlugin'
 
+    def RESTORE_BOOTSTRAP_STATE_ENTRY_KEY_CUSTOM_VALUE_NAME = 'Bootstrap image key'
+    def RESTORE_BOOTSTRAP_STATE_ENTRY_SIZE_CUSTOM_VALUE_NAME = 'Bootstrap image download size'
+    def RESTORE_BOOTSTRAP_STATE_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap image download duration'
+    def RESTORE_BOOTSTRAP_STATE_UNPACK_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap image unpack duration'
+
     def develocityUrl = getInputParam(gradle, 'develocity-injection.url')
     def develocityAllowUntrustedServer = Boolean.parseBoolean(getInputParam(gradle, 'develocity-injection.allow-untrusted-server'))
     def develocityEnforceUrl = Boolean.parseBoolean(getInputParam(gradle, 'develocity-injection.enforce-url'))
@@ -295,6 +300,11 @@ void enableDevelocityInjection() {
 
                     eachDevelocitySettingsExtension(settings) { ext ->
                         ext.buildScan.value CI_AUTO_INJECTION_CUSTOM_VALUE_NAME, ciAutoInjectionCustomValueValue
+
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_ENTRY_KEY')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ENTRY_KEY_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_ENTRY_SIZE')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ENTRY_SIZE_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_DOWNLOAD_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_UNPACK_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_UNPACK_DURATION_CUSTOM_VALUE_NAME, it }
                     }
 
                     eachDevelocitySettingsExtension(settings,
