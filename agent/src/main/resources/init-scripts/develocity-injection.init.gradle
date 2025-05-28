@@ -128,9 +128,10 @@ void enableDevelocityInjection() {
     def CCUD_PLUGIN_CLASS = 'com.gradle.CommonCustomUserDataGradlePlugin'
 
     def RESTORE_BOOTSTRAP_STATE_ENTRY_KEY_CUSTOM_VALUE_NAME = 'Bootstrap image key'
-    def RESTORE_BOOTSTRAP_STATE_ENTRY_SIZE_CUSTOM_VALUE_NAME = 'Bootstrap image download size'
-    def RESTORE_BOOTSTRAP_STATE_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap image download duration'
-    def RESTORE_BOOTSTRAP_STATE_UNPACK_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap image unpack duration'
+    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT = 'Bootstrap artifacts count'
+    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE_CUSTOM_VALUE_NAME = 'Bootstrap artifacts total download size'
+    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap artifacts download duration'
+    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_UNPACK_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap artifacts unpack duration'
 
     def develocityUrl = getInputParam(gradle, 'develocity-injection.url')
     def develocityAllowUntrustedServer = Boolean.parseBoolean(getInputParam(gradle, 'develocity-injection.allow-untrusted-server'))
@@ -302,9 +303,10 @@ void enableDevelocityInjection() {
                         ext.buildScan.value CI_AUTO_INJECTION_CUSTOM_VALUE_NAME, ciAutoInjectionCustomValueValue
 
                         System.getenv('RESTORE_BOOTSTRAP_STATE_ENTRY_KEY')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ENTRY_KEY_CUSTOM_VALUE_NAME, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_ENTRY_SIZE')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ENTRY_SIZE_CUSTOM_VALUE_NAME, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_DOWNLOAD_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_UNPACK_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_UNPACK_DURATION_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_UNPACK_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_UNPACK_DURATION_CUSTOM_VALUE_NAME, it }
                     }
 
                     eachDevelocitySettingsExtension(settings,

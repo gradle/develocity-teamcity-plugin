@@ -93,7 +93,7 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
             description += String.format("* Enable restoring bootstrap state from Develocity: %s\n", enableRestoreBootstrapState);
         }
 
-        String bootstrapImageName = params.get(BOOTSTRAP_IMAGE_NAME);
+        String bootstrapImageName = params.get(BOOTSTRAP_MANIFEST_PREFIX);
         if (bootstrapImageName != null) {
             description += String.format("* Develocity bootstrap image name: %s\n", bootstrapImageName);
         }

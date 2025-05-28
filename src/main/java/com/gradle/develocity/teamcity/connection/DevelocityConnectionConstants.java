@@ -25,7 +25,7 @@ public final class DevelocityConnectionConstants {
     public static final String ENFORCE_DEVELOCITY_URL = "enforceDevelocityUrl";
     public static final String ENABLE_INJECTION = "enableInjection";
     public static final String ENABLE_RESTORE_BOOTSTRAP_STATE = "enableRestoreBootstrapState";
-    public static final String BOOTSTRAP_IMAGE_NAME = "bootstrapImageName";
+    public static final String BOOTSTRAP_MANIFEST_PREFIX = "bootstrapManifestPrefix";
 
     // Constants defined by the BuildScanServiceMessageInjector
     // This connection sets these values as build parameters so that they can be picked up by the BuildScanServiceMessageInjector
@@ -53,7 +53,7 @@ public final class DevelocityConnectionConstants {
     // Constants defined by the BootstrapStateRestorer
     // This connection sets these values as build parameters so that they can be picked up by the BootstrapStateRestorer
     public static final String ENABLE_RESTORE_BOOTSTRAP_STATE_CONFIG_PARAM = "develocityPlugin.enable-restore-bootstrap-state";
-    public static final String BOOTSTRAP_IMAGE_NAME_CONFIG_PARAM = "develocityPlugin.bootstrapImageName";
+    public static final String BOOTSTRAP_IMAGE_NAME_CONFIG_PARAM = "develocityPlugin.bootstrap-manifest-prefix";
 
 
     // The below getters exist so that develocityConnectionDialog.jsp can read these constants using JavaBean conventions
@@ -134,7 +134,7 @@ public final class DevelocityConnectionConstants {
         return ENABLE_RESTORE_BOOTSTRAP_STATE;
     }
 
-    public String getBootstrapImageName() {
-        return BOOTSTRAP_IMAGE_NAME;
+    public String getBootstrapManifestPrefix() {
+        return BOOTSTRAP_MANIFEST_PREFIX;
     }
 }
