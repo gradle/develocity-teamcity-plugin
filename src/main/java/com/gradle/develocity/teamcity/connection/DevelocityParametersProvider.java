@@ -79,7 +79,7 @@ public final class DevelocityParametersProvider implements BuildParametersProvid
                 setParameter(ENABLE_INJECTION_CONFIG_PARAM, connectionParams.get(ENABLE_INJECTION), params);
                 setParameter(ENFORCE_DEVELOCITY_URL_CONFIG_PARAM, connectionParams.get(ENFORCE_DEVELOCITY_URL), params);
                 setParameter(ENABLE_RESTORE_BOOTSTRAP_STATE_CONFIG_PARAM, connectionParams.get(ENABLE_RESTORE_BOOTSTRAP_STATE), params);
-                setParameter(BOOTSTRAP_IMAGE_NAME_CONFIG_PARAM, connectionParams.get(BOOTSTRAP_IMAGE_NAME), params);
+                setParameter(BOOTSTRAP_IMAGE_NAME_CONFIG_PARAM, connectionParams.get(BOOTSTRAP_MANIFEST_PREFIX), params);
             }
             previousBuild = build;
             cachedParametersFromPreviousBuild = params;

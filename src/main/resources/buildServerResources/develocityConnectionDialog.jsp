@@ -87,7 +87,7 @@
 </tr>
 
 <tr>
-    <td><label for="${keys.enableRestoreBootstrapState}"></label></td>
+    <td><label for="${keys.enableRestoreBootstrapState}">Enable restoring bootstrap state:</label></td>
     <td>
         <props:checkboxProperty name="${keys.enableRestoreBootstrapState}"/>
         <span class="smallNote">Whether to enable restoring the bootstrap state of the CI agent from Develocity.</span>
@@ -95,9 +95,9 @@
 </tr>
 
 <tr>
-    <td><label for="${keys.bootstrapImageName}"></label></td>
+    <td><label for="${keys.bootstrapManifestPrefix}">Manifest prefix:</label></td>
     <td>
-        <props:textProperty name="${keys.bootstrapImageName}" className="longField"/>
+        <props:textProperty name="${keys.bootstrapManifestPrefix}" className="longField"/>
         <span class="smallNote">The name of the image for restoring bootstrapping state from Develocity.</span>
     </td>
 </tr>

@@ -15,6 +15,9 @@ configurations {
 }
 
 dependencies {
+    // TODO: Replace with file dependency for CLI tool
+    implementation files('libs/universal-cache-mock-1.0-SNAPSHOT.jar')
+
     mvnExtensions project(path: ':agent:service-message-maven-extension', configuration: 'mvnExtension')
     mvnExtensions 'com.gradle:develocity-maven-extension:2.0.1'
     mvnExtensions 'com.gradle:common-custom-user-data-maven-extension:2.0.3'
