@@ -166,7 +166,7 @@ For Maven builds, the version of the Develocity Maven extension automatically ap
 
 | Develocity Teamcity Plugin version | Injected DV Maven extension version | Injected Common CCUD Maven extension version |
 |------------------------------------|-------------------------------------|----------------------------------------------|
-| Next                               | 2.0                                 | 2.0.2                                        |
+| Next                               | 2.0.1                               | 2.0.2                                        |
 
 </details>
 
