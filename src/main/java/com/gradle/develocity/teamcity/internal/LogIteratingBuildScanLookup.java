@@ -12,13 +12,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public final class LogIteratingBuildScanLookup implements BuildScanLookup {
 
     private static final Logger LOGGER = Logger.getLogger("jetbrains.buildServer.BUILDSCAN");
 
-    private static final String PUBLISHING_BUILD_PATTERN_GRADLE = "Publishing build scan...";
-    private static final String PUBLISHING_BUILD_PATTERN_MAVEN = "[INFO] Publishing build scan...";
+    private static final Set<String> PUBLISHING_BUILD_PATTERNS = Set.of(
+        // Maven
+        "[INFO] Publishing build scan...",
+        "[INFO] Publishing Build Scan...",
+        // Gradle
+        "Publishing build scan...",
+        "Publishing Build Scan..."
+    );
 
     @Override
     @NotNull
@@ -38,7 +45,7 @@ public final class LogIteratingBuildScanLookup implements BuildScanLookup {
         for (Iterator<LogMessage> iterator = build.getBuildLog().getMessagesIterator(); iterator.hasNext(); ) {
             LogMessage message = iterator.next();
             String text = message.getText();
-            if (!foundPublishMessage && (PUBLISHING_BUILD_PATTERN_GRADLE.equals(text) || PUBLISHING_BUILD_PATTERN_MAVEN.equals(text))) {
+            if (!foundPublishMessage && PUBLISHING_BUILD_PATTERNS.contains(text)) {
                 foundPublishMessage = true;
             } else if (foundPublishMessage && Util.isBuildScanUrl(text)) {
                 buildScans.add(new BuildScanReference(Util.getBuildScanId(text), Util.getBuildScanUrl(text)));
