@@ -5,6 +5,25 @@ plugins {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url = uri("https://repo.grdev.net/artifactory/enterprise-libs-releases-local")
+
+        credentials {
+            username = providers.gradleProperty("gradleInternalRepositoryUsername").get()
+            password = providers.gradleProperty("gradleInternalRepositoryPassword").get()
+        }
+
+        logger.log(LogLevel.LIFECYCLE, "Develocity bootstrap CLI resolution: ${url}")
+
+        authentication {
+            basic(BasicAuthentication)
+        }
+
+        content {
+            it.includeModule("com.gradle", "develocity-bootstrap-cli")
+        }
+    }
 }
 
 configurations {
@@ -12,18 +31,25 @@ configurations {
         canBeConsumed = false
         canBeResolved = true
     }
+
+    develocityBootstrapCliTool {
+        canBeConsumed = false
+        canBeResolved = true
+    }
 }
 
+// Keep in sync with class `DevelocityBootstrapCliToolProvider`
+def develocityBootstrapCliVersion = "0.1-98641805"
+
 dependencies {
-    // TODO: Replace with file dependency for CLI tool
-    implementation files('libs/universal-cache-mock-1.0-SNAPSHOT.jar')
+    develocityBootstrapCliTool "com.gradle:develocity-bootstrap-cli:${develocityBootstrapCliVersion}"
 
     mvnExtensions project(path: ':agent:service-message-maven-extension', configuration: 'mvnExtension')
     mvnExtensions 'com.gradle:develocity-maven-extension:2.0.1'
     mvnExtensions 'com.gradle:common-custom-user-data-maven-extension:2.0.3'
 
     testImplementation gradleTestKit()
-    testImplementation ('io.ratpack:ratpack-groovy-test:1.10.0-milestone-39') {
+    testImplementation('io.ratpack:ratpack-groovy-test:1.10.0-milestone-39') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
     testImplementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.19.0'
@@ -40,12 +66,13 @@ def generateInitScript = tasks.register('generateInitScript') {
     outputs.file(generatedInitScript)
     doLast {
         generatedInitScript.get().asFile.text =
-            referenceInitScript.text.replace("class BuildScanCollector {}", buildScanCollector.text)
+                referenceInitScript.text.replace("class BuildScanCollector {}", buildScanCollector.text)
     }
 }
 
 processResources {
     from configurations.mvnExtensions
+    from configurations.develocityBootstrapCliTool
     from generateInitScript
 }
 
