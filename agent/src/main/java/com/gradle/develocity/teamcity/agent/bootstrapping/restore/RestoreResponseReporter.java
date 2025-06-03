@@ -1,4 +1,4 @@
-package com.gradle.develocity.teamcity.agent.bootstrapping;
+package com.gradle.develocity.teamcity.agent.bootstrapping.restore;
 
 import jetbrains.buildServer.agent.BuildRunnerContext;
 
