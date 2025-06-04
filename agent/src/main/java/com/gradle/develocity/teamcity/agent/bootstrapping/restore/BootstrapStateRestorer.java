@@ -8,6 +8,7 @@ import jetbrains.buildServer.util.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URI;
+import java.util.Optional;
 
 public class BootstrapStateRestorer extends AgentLifeCycleAdapter {
 
@@ -29,17 +30,19 @@ public class BootstrapStateRestorer extends AgentLifeCycleAdapter {
             LOG.info(String.format("Restoring bootstrap state for job %s from image with prefix %s", getJobId(context), manifestPrefix));
 
             BootstrapStateRestoreService restoreService = new BootstrapStateRestoreService(URI.create("http://edge.url"), "token", context);
-            RestoreResponse restoreResponse = restoreService.restoreFromManifestWithPrefix(manifestPrefix);
+            Optional<RestoreResponse> maybeRestoreResponse = restoreService.restoreFromManifestWithPrefix(manifestPrefix);
 
-            BuildType buildType = BuildType.from(context);
-            switch (buildType) {
-                case GRADLE:
-                    new RestoreResponseReporter.ForGradle().report(context, restoreResponse);
-                    break;
+            maybeRestoreResponse.ifPresent(restoreResponse -> {
+                BuildType buildType = BuildType.from(context);
+                switch (buildType) {
+                    case GRADLE:
+                        new RestoreResponseReporter.ForGradle().report(context, restoreResponse);
+                        break;
 
-                case MAVEN:
-                    throw new IllegalArgumentException("Unsupported build type: " + buildType.name());
-            }
+                    case MAVEN:
+                        throw new IllegalArgumentException("Unsupported build type: " + buildType.name());
+                }
+            });
         }
     }
 
