@@ -34,13 +34,13 @@ interface RestoreResponseReporter {
         final double HOUR = 60 * MINUTE;
 
         if (durationInMillis >= HOUR) {
-            return String.format("%.1f hours", durationInMillis / HOUR);
+            return String.format("%.1f h", durationInMillis / HOUR);
         } else if (durationInMillis >= MINUTE) {
-            return String.format("%.1f minutes", durationInMillis / MINUTE);
+            return String.format("%.1f m", durationInMillis / MINUTE);
         } else if (durationInMillis >= SECOND) {
-            return String.format("%.1f seconds", durationInMillis / SECOND);
+            return String.format("%.1f s", durationInMillis / SECOND);
         } else {
-            return durationInMillis + " milli seconds";
+            return durationInMillis + " ms";
         }
     }
 
