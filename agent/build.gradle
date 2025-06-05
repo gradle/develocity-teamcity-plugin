@@ -59,7 +59,9 @@ dependencies {
     mvnExtensions 'com.gradle:develocity-maven-extension:2.0.1'
     mvnExtensions 'com.gradle:common-custom-user-data-maven-extension:2.0.3'
 
-    implementation('com.google.guava:guava:33.4.8-jre', because="Using @VisibleForTest annotation")
+    implementation('com.google.guava:guava:33.4.8-jre') {
+        because("@VisibleForTest annotation")
+    }
 
     testImplementation gradleTestKit()
     testImplementation('io.ratpack:ratpack-groovy-test:1.10.0-milestone-39') {
