@@ -1,5 +1,6 @@
 package com.gradle.develocity.teamcity.agent.bootstrapping.restore;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.openapi.diagnostic.Logger;
 import jetbrains.buildServer.agent.BuildRunnerContext;
 
@@ -24,9 +25,17 @@ class JdkProvider {
     private static final Pattern JDKS_WITH_MAJOR_AND_MINOR_VERSION_ENV_VAR_PATTERN = Pattern.compile("^JDK_(\\d+)_(\\d+)$");
 
     private final BuildRunnerContext context;
+    private final JavaExecutableFinder javaExecutableFinder;
 
     JdkProvider(BuildRunnerContext context) {
         this.context = context;
+        this.javaExecutableFinder = new DefaultJavaExecutableFinder();
+    }
+
+    @VisibleForTesting
+    JdkProvider(BuildRunnerContext context, JavaExecutableFinder javaExecutableFinder) {
+        this.context = context;
+        this.javaExecutableFinder = javaExecutableFinder;
     }
 
     /**
@@ -58,7 +67,7 @@ class JdkProvider {
         String chosenJdk = valueForEnvVar(chosenJdkEnvVar);
         LOG.info(format("Chosen JDK %s is located at '%s'", chosenJdkEnvVar, chosenJdk));
 
-        Optional<Path> javaBinaryPath = executablePathFor(chosenJdk);
+        Optional<Path> javaBinaryPath = javaExecutableFinder.executablePathFor(Paths.get(chosenJdk));
         if (javaBinaryPath.isPresent()) {
             return Optional.of(new JdkLocation(chosenJdkEnvVar, javaBinaryPath.get()));
         } else {
@@ -99,30 +108,6 @@ class JdkProvider {
         return items.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(", ", "[", "]"));
-    }
-
-    private Optional<Path> executablePathFor(String chosenJdk) {
-        Path jdkBasePath = Paths.get(chosenJdk);
-
-        switch (OperatingSystem.current(context)) {
-            case LINUX:
-            case MACOS: {
-                Path javaBinary = jdkBasePath.resolve("bin").resolve("java");
-                return pathIfIsExecutable(javaBinary);
-            }
-
-            case WINDOWS: {
-                Path javaBinary = jdkBasePath.resolve("bin").resolve("java.exe");
-                return pathIfIsExecutable(javaBinary);
-            }
-
-            case UNKNOWN:
-                LOG.warn("Unsupported operating system: " + OperatingSystem.current(context));
-                return Optional.empty();
-
-            default:
-                throw new IllegalStateException("Unsupported operating system: " + OperatingSystem.current(context));
-        }
     }
 
     private static Optional<Path> pathIfIsExecutable(Path javaBinary) {
@@ -166,6 +151,38 @@ class JdkProvider {
 
         public Path executablePath() {
             return executablePath;
+        }
+    }
+
+    interface JavaExecutableFinder {
+
+        Optional<Path> executablePathFor(Path jdkBasePath);
+
+    }
+
+    class DefaultJavaExecutableFinder implements JavaExecutableFinder {
+
+        @Override
+        public Optional<Path> executablePathFor(Path jdkBasePath) {
+            switch (OperatingSystem.current(context)) {
+                case LINUX:
+                case MACOS: {
+                    Path javaBinary = jdkBasePath.resolve("bin").resolve("java");
+                    return pathIfIsExecutable(javaBinary);
+                }
+
+                case WINDOWS: {
+                    Path javaBinary = jdkBasePath.resolve("bin").resolve("java.exe");
+                    return pathIfIsExecutable(javaBinary);
+                }
+
+                case UNKNOWN:
+                    LOG.warn("Unsupported operating system: " + OperatingSystem.current(context));
+                    return Optional.empty();
+
+                default:
+                    throw new IllegalStateException("Unsupported operating system: " + OperatingSystem.current(context));
+            }
         }
     }
 }
