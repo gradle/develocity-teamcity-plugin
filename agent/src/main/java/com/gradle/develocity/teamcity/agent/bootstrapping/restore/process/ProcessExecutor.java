@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class ProcessExecutor implements AutoCloseable {
     public ExecutionResult execute(List<String> commandAndArguments, Duration timeout) throws TimeoutException, ExecutionException, InterruptedException {
         Callable<ExecutionResult> action = () -> {
             try {
+                Instant startTimestamp = Instant.now();
                 Process process = new ProcessBuilder(commandAndArguments).start();
                 Future<String> stdoutFuture = executor.submit(() -> readStream(process.getInputStream()));
                 Future<String> stderrFuture = executor.submit(() -> readStream(process.getErrorStream()));
@@ -26,8 +28,9 @@ public class ProcessExecutor implements AutoCloseable {
                 int exitCode = process.waitFor();
                 String stdout = stdoutFuture.get();
                 String stderr = stderrFuture.get();
+                Instant endTimestamp = Instant.now();
 
-                return ExecutionResult.of(exitCode, Duration.ZERO, stdout, stderr);
+                return ExecutionResult.of(exitCode, Duration.between(startTimestamp, endTimestamp), stdout, stderr);
             } catch (Exception e) {
                 throw new CompletionException(e);
             }
