@@ -40,10 +40,15 @@ public class BootstrapStateRestoreService {
             return Optional.empty();
         }
 
+        Optional<Path> maybeDvBootstrapCliTool = cliToolProvider.dvBootstrapCliTool();
+        if (!maybeDvBootstrapCliTool.isPresent()) {
+            return Optional.empty();
+        }
+
         JdkLocation jdkLocation = maybeJdkLocation.get();
         LOG.info(format("Using JDK at '%s'", jdkLocation.executablePath().toString()));
 
-        Path dvBootstrapCliTool = cliToolProvider.dvBootstrapCliTool();
+        Path dvBootstrapCliTool = maybeDvBootstrapCliTool.get();
         LOG.info(format("Using DV bootstrap cli tool at '%s'", dvBootstrapCliTool.toString()));
 
         try(ProcessExecutor executor = new ProcessExecutor()) {

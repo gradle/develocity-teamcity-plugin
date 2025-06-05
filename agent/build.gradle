@@ -3,26 +3,35 @@ plugins {
     id 'io.github.rodm.teamcity-agent'
 }
 
+// TODO: The Develocity Bootstrap CLI tool should be downloadable from a public place.
+def gradleRepoUsername = providers.gradleProperty("gradleInternalRepositoryUsername").orElse("").get()
+def gradleRepoPassword = providers.gradleProperty("gradleInternalRepositoryPassword").orElse("").get()
+def develocityBootstrapCliToolIsAvailable = gradleRepoUsername != "" && gradleRepoPassword != ""
+
 repositories {
     mavenCentral()
 
-    maven {
-        url = uri("https://repo.grdev.net/artifactory/enterprise-libs-releases-local")
+    if (develocityBootstrapCliToolIsAvailable) {
+        maven {
+            url = uri("https://repo.grdev.net/artifactory/enterprise-libs-releases-local")
 
-        credentials {
-            username = providers.gradleProperty("gradleInternalRepositoryUsername").get()
-            password = providers.gradleProperty("gradleInternalRepositoryPassword").get()
+            credentials {
+                username = gradleRepoUsername
+                password = gradleRepoPassword
+            }
+
+            logger.log(LogLevel.LIFECYCLE, "Develocity bootstrap CLI resolution: ${url}")
+
+            authentication {
+                basic(BasicAuthentication)
+            }
+
+            content {
+                it.includeModule("com.gradle", "develocity-bootstrap-cli")
+            }
         }
-
-        logger.log(LogLevel.LIFECYCLE, "Develocity bootstrap CLI resolution: ${url}")
-
-        authentication {
-            basic(BasicAuthentication)
-        }
-
-        content {
-            it.includeModule("com.gradle", "develocity-bootstrap-cli")
-        }
+    } else {
+        logger.log(LogLevel.WARN, "Develocity bootstrap CLI tool is not available!")
     }
 }
 
@@ -42,7 +51,9 @@ configurations {
 def develocityBootstrapCliVersion = "0.1-98641805"
 
 dependencies {
-    develocityBootstrapCliTool "com.gradle:develocity-bootstrap-cli:${develocityBootstrapCliVersion}"
+    if (develocityBootstrapCliToolIsAvailable) {
+        develocityBootstrapCliTool "com.gradle:develocity-bootstrap-cli:${develocityBootstrapCliVersion}"
+    }
 
     mvnExtensions project(path: ':agent:service-message-maven-extension', configuration: 'mvnExtension')
     mvnExtensions 'com.gradle:develocity-maven-extension:2.0.1'
