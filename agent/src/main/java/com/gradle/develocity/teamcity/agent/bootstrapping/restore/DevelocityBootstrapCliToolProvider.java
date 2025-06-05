@@ -6,6 +6,7 @@ import jetbrains.buildServer.util.FileUtil;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import static java.lang.String.format;
 
@@ -22,12 +23,15 @@ public class DevelocityBootstrapCliToolProvider {
         this.context = context;
     }
 
-    Path dvBootstrapCliTool() {
+    Optional<Path> dvBootstrapCliTool() {
         String toolJarName = format("/%s-%s.jar", DEVELOCITY_BOOTSTRAP_CLI_TOOL_NAME, DEVELOCITY_BOOTSTRAP_CLI_TOOL_VERSION);
         File toolJar = new File(agentsTempDirectory(), toolJarName);
+
+        // Copying resources does not throw an exception if the resource does not exist.
+        // Instead, only a warning is logged in the agent's log.
         FileUtil.copyResourceIfNotExists(this.getClass(), toolJarName, toolJar);
 
-        return toolJar.toPath();
+        return toolJar.exists() ? Optional.of(toolJar.toPath()) : Optional.empty();
     }
 
     private File agentsTempDirectory() {
