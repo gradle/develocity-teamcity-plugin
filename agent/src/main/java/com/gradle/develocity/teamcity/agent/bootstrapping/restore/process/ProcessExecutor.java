@@ -1,5 +1,6 @@
 package com.gradle.develocity.teamcity.agent.bootstrapping.restore.process;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.intellij.openapi.diagnostic.Logger;
 
 import java.io.BufferedReader;
@@ -43,6 +44,7 @@ public class ProcessExecutor implements AutoCloseable {
         return execute(action, timeout);
     }
 
+    @VisibleForTesting
     <T> T execute(Callable<T> action, Duration timeout) throws TimeoutException, ExecutionException, InterruptedException {
         CompletableFuture<T> result = CompletableFuture.supplyAsync(() -> {
             try {
