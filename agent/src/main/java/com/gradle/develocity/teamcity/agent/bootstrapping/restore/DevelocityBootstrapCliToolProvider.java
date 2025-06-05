@@ -24,12 +24,12 @@ public class DevelocityBootstrapCliToolProvider {
     }
 
     Optional<Path> dvBootstrapCliTool() {
-        String toolJarName = format("/%s-%s.jar", DEVELOCITY_BOOTSTRAP_CLI_TOOL_NAME, DEVELOCITY_BOOTSTRAP_CLI_TOOL_VERSION);
+        String toolJarName = format("%s-%s.jar", DEVELOCITY_BOOTSTRAP_CLI_TOOL_NAME, DEVELOCITY_BOOTSTRAP_CLI_TOOL_VERSION);
         File toolJar = new File(agentsTempDirectory(), toolJarName);
 
         // Copying resources does not throw an exception if the resource does not exist.
         // Instead, only a warning is logged in the agent's log.
-        FileUtil.copyResourceIfNotExists(this.getClass(), toolJarName, toolJar);
+        FileUtil.copyResourceIfNotExists(this.getClass(), format("/%s", toolJarName), toolJar);
 
         return toolJar.exists() ? Optional.of(toolJar.toPath()) : Optional.empty();
     }
