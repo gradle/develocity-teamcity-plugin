@@ -43,7 +43,7 @@ class BuildScanReferenceTest extends Specification {
         def reference = BuildScanReference.getResource("Badge.html").text
 
         when:
-        def badge = buildScanReference.buildScanBadge
+        def badge = buildScanReference.publishedBuildScanBadge
         then:
         reference == """\
             <html><body>

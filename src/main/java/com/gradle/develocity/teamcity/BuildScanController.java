@@ -81,7 +81,14 @@ public class BuildScanController extends BaseController {
         if (build != null) {
             BuildScanReferences buildScans = buildScanLookup.getBuildScansForBuild(build);
             mv.getModel().put("hasSupportedRunner", buildScanDisplayArbiter.hasSupportedRunner(build.getBuildType()));
-            mv.getModel().put("buildScans", buildScans);
+
+            if (buildScans.isEmpty()) {
+                mv.getModel().put("buildScan", BuildScanReference.NOT_PUBLISHED);
+                mv.getModel().put("isPublished", false);
+            } else {
+                mv.getModel().put("isPublished", true);
+                mv.getModel().put("buildScans", buildScans);
+            }
         }
         return mv;
     }
