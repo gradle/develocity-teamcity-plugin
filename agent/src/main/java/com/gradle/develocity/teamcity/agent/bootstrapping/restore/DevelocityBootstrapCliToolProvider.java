@@ -15,7 +15,6 @@ public class DevelocityBootstrapCliToolProvider {
     private static final Logger LOG = Logger.getInstance("jetbrains.buildServer.AGENT");
     // Keep in sync with `agent/build.gradle`
     private static final String DEVELOCITY_BOOTSTRAP_CLI_TOOL_NAME = "develocity-bootstrap-cli";
-    private static final String DEVELOCITY_BOOTSTRAP_CLI_TOOL_VERSION = "0.1-98641805";
 
     private final BuildRunnerContext context;
 
@@ -24,7 +23,7 @@ public class DevelocityBootstrapCliToolProvider {
     }
 
     Optional<Path> dvBootstrapCliTool() {
-        String toolJarName = format("%s-%s.jar", DEVELOCITY_BOOTSTRAP_CLI_TOOL_NAME, DEVELOCITY_BOOTSTRAP_CLI_TOOL_VERSION);
+        String toolJarName = format("%s.jar", DEVELOCITY_BOOTSTRAP_CLI_TOOL_NAME);
         File toolJar = new File(agentsTempDirectory(), toolJarName);
 
         // Copying resources does not throw an exception if the resource does not exist.

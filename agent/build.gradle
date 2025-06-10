@@ -6,12 +6,12 @@ plugins {
 // TODO: The Develocity Bootstrap CLI tool should be downloadable from a public place.
 def gradleRepoUsername = providers.gradleProperty("gradleInternalRepositoryUsername").orElse("").get()
 def gradleRepoPassword = providers.gradleProperty("gradleInternalRepositoryPassword").orElse("").get()
-def develocityBootstrapCliToolIsAvailable = gradleRepoUsername != "" && gradleRepoPassword != ""
+def dvBootstrapToolIsAvailable = gradleRepoUsername != "" && gradleRepoPassword != ""
 
 repositories {
     mavenCentral()
 
-    if (develocityBootstrapCliToolIsAvailable) {
+    if (dvBootstrapToolIsAvailable) {
         maven {
             url = uri("https://repo.grdev.net/artifactory/enterprise-libs-releases-local")
 
@@ -41,18 +41,19 @@ configurations {
         canBeResolved = true
     }
 
-    develocityBootstrapCliTool {
+    dvBootstrapTool {
         canBeConsumed = false
         canBeResolved = true
     }
 }
 
-// Keep in sync with class `DevelocityBootstrapCliToolProvider`
-def develocityBootstrapCliVersion = "0.1-98641805"
+def dvBootstrapToolGroup = "com.gradle"
+def dvBootstrapToolArtifact = "develocity-bootstrap-cli"
+def dvBootstrapToolVersion = "+"
 
 dependencies {
-    if (develocityBootstrapCliToolIsAvailable) {
-        develocityBootstrapCliTool "com.gradle:develocity-bootstrap-cli:${develocityBootstrapCliVersion}"
+    if (dvBootstrapToolIsAvailable) {
+        dvBootstrapTool "${dvBootstrapToolGroup}:${dvBootstrapToolArtifact}:${dvBootstrapToolVersion}"
     }
 
     mvnExtensions project(path: ':agent:service-message-maven-extension', configuration: 'mvnExtension')
@@ -72,6 +73,13 @@ dependencies {
     testImplementation('org.spockframework:spock-junit4:2.3-groovy-3.0')
 }
 
+def resolvedDvBootstrapToolVersion = providers.provider {
+    configurations.dvBootstrapTool.resolvedConfiguration.firstLevelModuleDependencies
+            .find {
+                it.moduleGroup == dvBootstrapToolGroup && it.moduleName == dvBootstrapToolArtifact
+            }?.moduleVersion
+}
+
 def generateInitScript = tasks.register('generateInitScript') {
     def referenceInitScript = file('src/main/resources/init-scripts/develocity-injection.init.gradle')
     def buildScanCollector = file('src/main/resources/init-scripts/build-scan-collector.groovy')
@@ -87,8 +95,18 @@ def generateInitScript = tasks.register('generateInitScript') {
 
 processResources {
     from configurations.mvnExtensions
-    from configurations.develocityBootstrapCliTool
+    from configurations.dvBootstrapTool {
+        rename "${dvBootstrapToolArtifact}-.*.jar", "${dvBootstrapToolArtifact}.jar"
+    }
+
     from generateInitScript
+
+    doLast {
+        if (resolvedDvBootstrapToolVersion.present) {
+            def versionFile = new File(destinationDir, "${dvBootstrapToolArtifact}-version.txt")
+            versionFile.write(resolvedDvBootstrapToolVersion.get())
+        }
+    }
 }
 
 java {
