@@ -22,13 +22,13 @@ public class BootstrapStateRestoreService {
     private static final Logger LOG = Logger.getInstance("jetbrains.buildServer.AGENT");
     private static final Duration RESTORE_TIMEOUT = Duration.ofMinutes(10);
 
-    private final URI edgeUrl;
+    private final URI develocityUrl;
     private final String token;
     private final JdkProvider jdkProvider;
     private final DevelocityBootstrapCliToolProvider cliToolProvider;
 
-    BootstrapStateRestoreService(URI edgeUrl, String token, BuildRunnerContext context) {
-        this.edgeUrl = edgeUrl;
+    BootstrapStateRestoreService(URI develocityUrl, String token, BuildRunnerContext context) {
+        this.develocityUrl = develocityUrl;
         this.token = token;
         this.jdkProvider = new JdkProvider(context);
         this.cliToolProvider = new DevelocityBootstrapCliToolProvider(context);
