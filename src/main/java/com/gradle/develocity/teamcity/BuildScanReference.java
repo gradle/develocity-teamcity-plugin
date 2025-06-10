@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 public final class BuildScanReference implements Serializable {
 
+    public static final BuildScanReference NOT_PUBLISHED = new BuildScanReference("notPublished", "https://scans.gradle.com");
+
     // getters required for access from JSP templates
     private final String id;
     private final String url;
@@ -41,8 +43,12 @@ public final class BuildScanReference implements Serializable {
         }
     }
 
-    public String getBuildScanBadge() {
-        return BuildScanBadge.createEncoded(this);
+    public String getPublishedBuildScanBadge() {
+        return BuildScanBadge.createEncoded(this, true);
+    }
+
+    public String getNotPublishedBuildScanBadge() {
+        return BuildScanBadge.createEncoded(this, false);
     }
 
     @Override

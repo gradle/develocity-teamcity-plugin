@@ -62,8 +62,8 @@ teamcity {
     server {
         descriptor {
             name = 'Develocity'
-            displayName = 'Develocity integration for Gradle and Maven builds'
-            description = 'Provides easy navigation from TeamCity builds to Gradle and Maven build scans'
+            displayName = 'Develocity for TeamCity'
+            description = 'Provides integration with Develocity via auto-instrumentation of the CI jobs.'
             version = project.version
             vendorName = 'Gradle Inc.'
             vendorUrl = 'https://github.com'
