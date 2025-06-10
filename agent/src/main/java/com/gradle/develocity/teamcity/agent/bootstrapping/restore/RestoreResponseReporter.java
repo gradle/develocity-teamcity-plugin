@@ -3,6 +3,11 @@ package com.gradle.develocity.teamcity.agent.bootstrapping.restore;
 import jetbrains.buildServer.agent.BuildRunnerContext;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -50,23 +55,36 @@ interface RestoreResponseReporter {
 
     class ForGradle implements RestoreResponseReporter {
 
-        // The env variables will be used to create custom values via the Gradle init script (`develocity-injection.init.gradle`)
-        private static final String BOOTSTRAP_STATE_ENV_VAR_PREFIX = "RESTORE_BOOTSTRAP_STATE_";
-        private static final String IMAGE_NAME_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "IMAGE_NAME";
-        private static final String ARTIFACTS_COUNT_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_COUNT";
-        private static final String ARTIFACTS_TOTAL_SIZE_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_TOTAL_SIZE";
-        private static final String ARTIFACTS_DOWNLOAD_DURATION_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_DOWNLOAD_DURATION";
-        private static final String ARTIFACTS_UNPACK_DURATION_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_UNPACK_DURATION";
+        private static final Pattern ALLOWED_CHARACTERS_PATTERN = Pattern.compile("[^a-zA-Z0-9 .,]");
+
+        private static final String DEVELOCITY_INJECTION_CUSTOM_VALUES_ENV_VAR = "DEVELOCITY_INJECTION_CUSTOM_VALUES";
+        private static final String IMAGE_NAME_CUSTOM_VALUE_NAME = "Bootstrap image";
+        private static final String ARTIFACTS_COUNT_CUSTOM_VALUE_NAME = "Bootstrap artifacts count";
+        private static final String ARTIFACTS_TOTAL_DOWNLOAD_SIZE_CUSTOM_VALUE_NAME = "Bootstrap artifacts total download size";
+        private static final String RESTORE_WALL_CLOCK_DURATION_CUSTOM_VALUE_NAME = "Bootstrap restore wall clock duration";
 
         @Override
         public void report(BuildRunnerContext runner, RestoreResponse restoreResponse) {
-            runner.addEnvironmentVariable(IMAGE_NAME_ENV_VAR, restoreResponse.imageName());
-            runner.addEnvironmentVariable(ARTIFACTS_COUNT_ENV_VAR, toNumberString(restoreResponse.artifactCount()));
-            runner.addEnvironmentVariable(ARTIFACTS_TOTAL_SIZE_ENV_VAR, toStorageSizeString(restoreResponse.totalArtifactSizeInBytes()));
-            runner.addEnvironmentVariable(ARTIFACTS_DOWNLOAD_DURATION_ENV_VAR, toDurationString(restoreResponse.totalArtifactDownloadDuration()));
-            runner.addEnvironmentVariable(ARTIFACTS_UNPACK_DURATION_ENV_VAR, toDurationString(restoreResponse.totalArtifactUnpackDuration()));
+            List<String> customValues = Arrays.asList(
+                    customValueFor(IMAGE_NAME_CUSTOM_VALUE_NAME, restoreResponse.imageName()),
+                    customValueFor(ARTIFACTS_COUNT_CUSTOM_VALUE_NAME, toNumberString(restoreResponse.artifactsCount())),
+                    customValueFor(ARTIFACTS_TOTAL_DOWNLOAD_SIZE_CUSTOM_VALUE_NAME, toStorageSizeString(restoreResponse.totalArtifactSizeInBytes())),
+                    customValueFor(RESTORE_WALL_CLOCK_DURATION_CUSTOM_VALUE_NAME, toDurationString(restoreResponse.wallClockDuration()))
+            );
+
+            String serializedCustomValuePairs = customValues.stream().collect(Collectors.joining(", "));
+
+            runner.addEnvironmentVariable(DEVELOCITY_INJECTION_CUSTOM_VALUES_ENV_VAR, serializedCustomValuePairs);
         }
 
+        private static String customValueFor(String name, String value) {
+            return format("'%s': '%s'", cleaned(name), cleaned(value));
+        }
+
+        private static String cleaned(String value) {
+            Matcher matcher = ALLOWED_CHARACTERS_PATTERN.matcher(value);
+            return matcher.replaceAll("");
+        }
     }
 
 }

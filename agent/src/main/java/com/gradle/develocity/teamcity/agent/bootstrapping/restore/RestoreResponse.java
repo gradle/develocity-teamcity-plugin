@@ -4,40 +4,35 @@ import java.time.Duration;
 
 public class RestoreResponse {
     private final String imageName;
-    private final long artifactCount;
+    private final long artifactsCount;
     private final long totalArtifactSizeInBytes;
-    private final Duration totalArtifactDownloadDuration;
-    private final Duration totalArtifactUnpackDuration;
+    private final Duration wallClockDuration;
 
-    private RestoreResponse(String imageName, long artifactCount, long totalArtifactSizeInBytes, Duration totalArtifactDownloadDuration, Duration totalArtifactUnpackDuration) {
+    private RestoreResponse(String imageName, long artifactsCount, long totalArtifactSizeInBytes, Duration wallClockDuration) {
         this.imageName = imageName;
-        this.artifactCount = artifactCount;
+        this.artifactsCount = artifactsCount;
         this.totalArtifactSizeInBytes = totalArtifactSizeInBytes;
-        this.totalArtifactDownloadDuration = totalArtifactDownloadDuration;
-        this.totalArtifactUnpackDuration = totalArtifactUnpackDuration;
+        this.wallClockDuration = wallClockDuration;
     }
 
-    static RestoreResponse of(String imageName, long artifactCount, long totalArtifactSizeInBytes, Duration totalArtifactDownloadDuration, Duration totalArtifactUnpackDuration) {
-        return new RestoreResponse(imageName, artifactCount, totalArtifactSizeInBytes, totalArtifactDownloadDuration, totalArtifactUnpackDuration);
+    static RestoreResponse of(String imageName, long artifactCount, long totalArtifactSizeInBytes, Duration wallClockDuration) {
+        return new RestoreResponse(imageName, artifactCount, totalArtifactSizeInBytes, wallClockDuration);
     }
 
     public String imageName() {
         return imageName;
     }
 
-    public long artifactCount() {
-        return artifactCount;
+    public long artifactsCount() {
+        return artifactsCount;
     }
 
     public long totalArtifactSizeInBytes() {
         return totalArtifactSizeInBytes;
     }
 
-    public Duration totalArtifactDownloadDuration() {
-        return totalArtifactDownloadDuration;
+    public Duration wallClockDuration() {
+        return wallClockDuration;
     }
 
-    public Duration totalArtifactUnpackDuration() {
-        return totalArtifactUnpackDuration;
-    }
 }

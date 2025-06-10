@@ -114,6 +114,20 @@ if (buildScanCaptureEnabled) {
     enableBuildScanLinkCapture(buildScanCollector)
 }
 
+static Map<String, String> toCustomValueMap(String serializedCustomValues) {
+    def pattern = /'([^']*)':\s*'([^']*)'/
+    def matcher = serializedCustomValues =~ pattern
+    def customValueMap = [:]
+
+    matcher.each { match ->
+        def key = match[1]
+        def value = match[2]
+        customValueMap[key] = value
+    }
+
+    return customValueMap as Map<String, String>
+}
+
 void enableDevelocityInjection() {
     def BUILD_SCAN_PLUGIN_CLASS = 'com.gradle.scan.plugin.BuildScanPlugin'
 
@@ -126,12 +140,6 @@ void enableDevelocityInjection() {
     def CI_AUTO_INJECTION_CUSTOM_VALUE_NAME = 'CI auto injection'
     def CCUD_PLUGIN_ID = 'com.gradle.common-custom-user-data-gradle-plugin'
     def CCUD_PLUGIN_CLASS = 'com.gradle.CommonCustomUserDataGradlePlugin'
-
-    def RESTORE_BOOTSTRAP_STATE_IMAGE_NAME_CUSTOM_VALUE_NAME = 'Bootstrap image name'
-    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT = 'Bootstrap artifacts count'
-    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE_CUSTOM_VALUE_NAME = 'Bootstrap artifacts total download size'
-    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap artifacts download duration'
-    def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_UNPACK_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap artifacts unpack duration'
 
     def develocityUrl = getInputParam(gradle, 'develocity-injection.url')
     def develocityAllowUntrustedServer = Boolean.parseBoolean(getInputParam(gradle, 'develocity-injection.allow-untrusted-server'))
@@ -302,11 +310,10 @@ void enableDevelocityInjection() {
                     eachDevelocitySettingsExtension(settings) { ext ->
                         ext.buildScan.value CI_AUTO_INJECTION_CUSTOM_VALUE_NAME, ciAutoInjectionCustomValueValue
 
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_IMAGE_NAME')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_IMAGE_NAME_CUSTOM_VALUE_NAME, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE_CUSTOM_VALUE_NAME, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME, it }
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_UNPACK_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_UNPACK_DURATION_CUSTOM_VALUE_NAME, it }
+                        def customValues = toCustomValueMap(System.getenv('DEVELOCITY_INJECTION_CUSTOM_VALUES') ?: '')
+                        customValues.each { key, value ->
+                            ext.buildScan.value key, value
+                        }
                     }
 
                     eachDevelocitySettingsExtension(settings,

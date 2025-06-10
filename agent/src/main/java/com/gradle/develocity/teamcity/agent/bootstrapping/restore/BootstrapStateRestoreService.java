@@ -51,7 +51,7 @@ public class BootstrapStateRestoreService {
         Path dvBootstrapCliTool = maybeDvBootstrapCliTool.get();
         LOG.info(format("Using DV bootstrap cli tool at '%s'", dvBootstrapCliTool.toString()));
 
-        try(ProcessExecutor executor = new ProcessExecutor()) {
+        try (ProcessExecutor executor = new ProcessExecutor()) {
             try {
                 List<String> command = Arrays.asList(
                         jdkLocation.executablePath().toString(),
@@ -84,11 +84,11 @@ public class BootstrapStateRestoreService {
 
         return Optional.of(
                 RestoreResponse.of(
-                        "image name",
-                        0L,
-                        0L,
-                        Duration.ZERO,
-                        Duration.ZERO)
+                        "image-42",
+                        42L,
+                        42424242L,
+                        Duration.ofSeconds(42)
+                )
         );
     }
 
