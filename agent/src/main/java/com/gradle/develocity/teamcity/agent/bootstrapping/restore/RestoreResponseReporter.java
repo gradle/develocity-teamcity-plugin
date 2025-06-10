@@ -52,7 +52,7 @@ interface RestoreResponseReporter {
 
         // The env variables will be used to create custom values via the Gradle init script (`develocity-injection.init.gradle`)
         private static final String BOOTSTRAP_STATE_ENV_VAR_PREFIX = "RESTORE_BOOTSTRAP_STATE_";
-        private static final String ENTRY_KEY_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ENTRY_KEY";
+        private static final String IMAGE_NAME_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "IMAGE_NAME";
         private static final String ARTIFACTS_COUNT_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_COUNT";
         private static final String ARTIFACTS_TOTAL_SIZE_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_TOTAL_SIZE";
         private static final String ARTIFACTS_DOWNLOAD_DURATION_ENV_VAR = BOOTSTRAP_STATE_ENV_VAR_PREFIX + "ARTIFACTS_DOWNLOAD_DURATION";
@@ -60,7 +60,7 @@ interface RestoreResponseReporter {
 
         @Override
         public void report(BuildRunnerContext runner, RestoreResponse restoreResponse) {
-            runner.addEnvironmentVariable(ENTRY_KEY_ENV_VAR, restoreResponse.manifestKey());
+            runner.addEnvironmentVariable(IMAGE_NAME_ENV_VAR, restoreResponse.imageName());
             runner.addEnvironmentVariable(ARTIFACTS_COUNT_ENV_VAR, toNumberString(restoreResponse.artifactCount()));
             runner.addEnvironmentVariable(ARTIFACTS_TOTAL_SIZE_ENV_VAR, toStorageSizeString(restoreResponse.totalArtifactSizeInBytes()));
             runner.addEnvironmentVariable(ARTIFACTS_DOWNLOAD_DURATION_ENV_VAR, toDurationString(restoreResponse.totalArtifactDownloadDuration()));

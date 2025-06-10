@@ -127,7 +127,7 @@ void enableDevelocityInjection() {
     def CCUD_PLUGIN_ID = 'com.gradle.common-custom-user-data-gradle-plugin'
     def CCUD_PLUGIN_CLASS = 'com.gradle.CommonCustomUserDataGradlePlugin'
 
-    def RESTORE_BOOTSTRAP_STATE_ENTRY_KEY_CUSTOM_VALUE_NAME = 'Bootstrap image key'
+    def RESTORE_BOOTSTRAP_STATE_IMAGE_NAME_CUSTOM_VALUE_NAME = 'Bootstrap image name'
     def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT = 'Bootstrap artifacts count'
     def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE_CUSTOM_VALUE_NAME = 'Bootstrap artifacts total download size'
     def RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME = 'Bootstrap artifacts download duration'
@@ -302,7 +302,7 @@ void enableDevelocityInjection() {
                     eachDevelocitySettingsExtension(settings) { ext ->
                         ext.buildScan.value CI_AUTO_INJECTION_CUSTOM_VALUE_NAME, ciAutoInjectionCustomValueValue
 
-                        System.getenv('RESTORE_BOOTSTRAP_STATE_ENTRY_KEY')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ENTRY_KEY_CUSTOM_VALUE_NAME, it }
+                        System.getenv('RESTORE_BOOTSTRAP_STATE_IMAGE_NAME')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_IMAGE_NAME_CUSTOM_VALUE_NAME, it }
                         System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_COUNT, it }
                         System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_TOTAL_SIZE_CUSTOM_VALUE_NAME, it }
                         System.getenv('RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION')?.with { ext.buildScan.value RESTORE_BOOTSTRAP_STATE_ARTIFACTS_DOWNLOAD_DURATION_CUSTOM_VALUE_NAME, it }

@@ -95,9 +95,9 @@
 </tr>
 
 <tr>
-    <td><label for="${keys.bootstrapManifestPrefix}">Manifest prefix:</label></td>
+    <td><label for="${keys.bootstrapImageName}">Image Name:</label></td>
     <td>
-        <props:textProperty name="${keys.bootstrapManifestPrefix}" className="longField"/>
+        <props:textProperty name="${keys.bootstrapImageName}" className="longField"/>
         <span class="smallNote">The name of the image for restoring bootstrapping state from Develocity.</span>
     </td>
 </tr>

@@ -34,7 +34,7 @@ public class BootstrapStateRestoreService {
         this.cliToolProvider = new DevelocityBootstrapCliToolProvider(context);
     }
 
-    Optional<RestoreResponse> restoreFromManifestWithPrefix(String manifestPrefix) {
+    Optional<RestoreResponse> restoreFrom(String imageName) {
         Optional<JdkLocation> maybeJdkLocation = jdkProvider.jdkForMajorVersion(21);
         if (!maybeJdkLocation.isPresent()) {
             return Optional.empty();
@@ -84,7 +84,7 @@ public class BootstrapStateRestoreService {
 
         return Optional.of(
                 RestoreResponse.of(
-                        "key",
+                        "image name",
                         0L,
                         0L,
                         Duration.ZERO,
