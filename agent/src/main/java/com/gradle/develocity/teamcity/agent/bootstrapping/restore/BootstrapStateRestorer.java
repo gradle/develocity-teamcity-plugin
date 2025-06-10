@@ -29,7 +29,7 @@ public class BootstrapStateRestorer extends AgentLifeCycleAdapter {
             String imageName = getImageName(context);
             LOG.info(String.format("Restoring bootstrap state for job %s from image with name %s", getJobId(context), imageName));
 
-            BootstrapStateRestoreService restoreService = new BootstrapStateRestoreService(URI.create("http://edge.url"), "token", context);
+            BootstrapStateRestoreService restoreService = new BootstrapStateRestoreService(URI.create("http://develocity.server.url"), "token", context);
             Optional<RestoreResponse> maybeRestoreResponse = restoreService.restoreFrom(imageName);
 
             maybeRestoreResponse.ifPresent(restoreResponse -> {
