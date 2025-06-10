@@ -62,7 +62,7 @@ teamcity {
     server {
         descriptor {
             name = 'Develocity'
-            displayName = 'Develocity for TeamCity'
+            displayName = 'Develocity integration'
             description = 'Provides integration with Develocity via auto-instrumentation of the CI jobs.'
             version = project.version
             vendorName = 'Gradle Inc.'
