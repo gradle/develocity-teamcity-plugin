@@ -78,7 +78,7 @@ public class BuildScanController extends BaseController {
             build = BuildDataExtensionUtil.retrieveBuild(request, buildServer);
         }
 
-        if (build != null) {
+        if (build != null && !build.isCompositeBuild()) {
             BuildScanReferences buildScans = buildScanLookup.getBuildScansForBuild(build);
             mv.getModel().put("hasSupportedRunner", buildScanDisplayArbiter.hasSupportedRunner(build.getBuildType()));
 
