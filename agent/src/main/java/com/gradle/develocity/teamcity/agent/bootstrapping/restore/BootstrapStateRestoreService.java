@@ -62,7 +62,13 @@ public class BootstrapStateRestoreService {
                         jdkLocation.executablePath().toString(),
                         "-jar",
                         dvBootstrapCliTool.toString(),
-                        "restore"
+                        "restore",
+                        "gradle",
+                        "--image-name=" + imageName,
+                        // Use a local cache for now, pending an Edge-backed implementation.
+                        "--local-only",
+                        "--working-directory=/tmp/dv-bootstrap/working",
+                        "--target-directory=/tmp/dv-bootstrap/target"
                 );
 
                 ExecutionResult result = executor.execute(command, RESTORE_TIMEOUT);
