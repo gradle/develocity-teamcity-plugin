@@ -4,6 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-autowire="constructor">
 
+    <bean class="com.gradle.develocity.teamcity.agent.bootstrapping.restore.BootstrapStateRestorer"/>
+
     <bean class="com.gradle.develocity.teamcity.agent.BuildScanServiceMessageInjector"/>
 
     <bean class="com.gradle.develocity.teamcity.agent.ExtensionApplicationListener$LoggingExtensionApplicationListener"/>
