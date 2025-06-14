@@ -114,6 +114,20 @@ if (buildScanCaptureEnabled) {
     enableBuildScanLinkCapture(buildScanCollector)
 }
 
+static Map<String, String> toCustomValueMap(String serializedCustomValues) {
+    def pattern = /'([^']*)':\s*'([^']*)'/
+    def matcher = serializedCustomValues =~ pattern
+    def customValueMap = [:]
+
+    matcher.each { match ->
+        def key = match[1]
+        def value = match[2]
+        customValueMap[key] = value
+    }
+
+    return customValueMap as Map<String, String>
+}
+
 void enableDevelocityInjection() {
     def BUILD_SCAN_PLUGIN_CLASS = 'com.gradle.scan.plugin.BuildScanPlugin'
 
@@ -295,6 +309,11 @@ void enableDevelocityInjection() {
 
                     eachDevelocitySettingsExtension(settings) { ext ->
                         ext.buildScan.value CI_AUTO_INJECTION_CUSTOM_VALUE_NAME, ciAutoInjectionCustomValueValue
+
+                        def customValues = toCustomValueMap(System.getenv('DEVELOCITY_INJECTION_CUSTOM_VALUES') ?: '')
+                        customValues.each { key, value ->
+                            ext.buildScan.value key, value
+                        }
                     }
 
                     eachDevelocitySettingsExtension(settings,

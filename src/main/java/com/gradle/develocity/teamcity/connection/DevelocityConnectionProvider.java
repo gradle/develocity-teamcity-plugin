@@ -86,6 +86,18 @@ public final class DevelocityConnectionProvider extends OAuthProvider {
             description += String.format("* Enable Develocity auto-injection: %s\n", enableInjection);
         }
 
+        description += "\nRestore Bootstrap State Settings:\n";
+
+        String enableRestoreBootstrapState = params.get(ENABLE_RESTORE_BOOTSTRAP_STATE);
+        if (enableRestoreBootstrapState != null) {
+            description += String.format("* Enable restoring bootstrap state from Develocity: %s\n", enableRestoreBootstrapState);
+        }
+
+        String bootstrapImageName = params.get(BOOTSTRAP_IMAGE_NAME);
+        if (bootstrapImageName != null) {
+            description += String.format("* Develocity bootstrap image name: %s\n", bootstrapImageName);
+        }
+
         description += "\nGradle Settings:\n";
 
         String gePluginVersion = params.get(DEVELOCITY_PLUGIN_VERSION);

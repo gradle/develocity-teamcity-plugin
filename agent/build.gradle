@@ -3,8 +3,36 @@ plugins {
     id 'io.github.rodm.teamcity-agent'
 }
 
+// TODO: The Develocity Bootstrap CLI tool should be downloadable from a public place.
+def gradleRepoUsername = providers.gradleProperty("gradleInternalRepositoryUsername").orElse("").get()
+def gradleRepoPassword = providers.gradleProperty("gradleInternalRepositoryPassword").orElse("").get()
+def dvBootstrapToolIsAvailable = gradleRepoUsername != "" && gradleRepoPassword != ""
+
 repositories {
     mavenCentral()
+
+    if (dvBootstrapToolIsAvailable) {
+        maven {
+            url = uri("https://repo.grdev.net/artifactory/enterprise-libs-releases-local")
+
+            credentials {
+                username = gradleRepoUsername
+                password = gradleRepoPassword
+            }
+
+            logger.log(LogLevel.LIFECYCLE, "Develocity bootstrap CLI resolution: ${url}")
+
+            authentication {
+                basic(BasicAuthentication)
+            }
+
+            content {
+                it.includeModule("com.gradle", "develocity-bootstrap-cli")
+            }
+        }
+    } else {
+        logger.log(LogLevel.WARN, "Develocity bootstrap CLI tool is not available!")
+    }
 }
 
 configurations {
@@ -12,20 +40,44 @@ configurations {
         canBeConsumed = false
         canBeResolved = true
     }
+
+    dvBootstrapTool {
+        canBeConsumed = false
+        canBeResolved = true
+    }
 }
 
+def dvBootstrapToolGroup = "com.gradle"
+def dvBootstrapToolArtifact = "develocity-bootstrap-cli"
+def dvBootstrapToolVersion = "+"
+
 dependencies {
+    if (dvBootstrapToolIsAvailable) {
+        dvBootstrapTool "${dvBootstrapToolGroup}:${dvBootstrapToolArtifact}:${dvBootstrapToolVersion}"
+    }
+
     mvnExtensions project(path: ':agent:service-message-maven-extension', configuration: 'mvnExtension')
     mvnExtensions 'com.gradle:develocity-maven-extension:2.0.1'
     mvnExtensions 'com.gradle:common-custom-user-data-maven-extension:2.0.3'
 
+    implementation('com.google.guava:guava:33.4.8-jre') {
+        because("@VisibleForTest annotation")
+    }
+
     testImplementation gradleTestKit()
-    testImplementation ('io.ratpack:ratpack-groovy-test:1.10.0-milestone-39') {
+    testImplementation('io.ratpack:ratpack-groovy-test:1.10.0-milestone-39') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
     }
     testImplementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.19.0'
     testImplementation('org.spockframework:spock-core:2.3-groovy-3.0')
     testImplementation('org.spockframework:spock-junit4:2.3-groovy-3.0')
+}
+
+def resolvedDvBootstrapToolVersion = providers.provider {
+    configurations.dvBootstrapTool.resolvedConfiguration.firstLevelModuleDependencies
+            .find {
+                it.moduleGroup == dvBootstrapToolGroup && it.moduleName == dvBootstrapToolArtifact
+            }?.moduleVersion
 }
 
 def generateInitScript = tasks.register('generateInitScript') {
@@ -37,13 +89,24 @@ def generateInitScript = tasks.register('generateInitScript') {
     outputs.file(generatedInitScript)
     doLast {
         generatedInitScript.get().asFile.text =
-            referenceInitScript.text.replace("class BuildScanCollector {}", buildScanCollector.text)
+                referenceInitScript.text.replace("class BuildScanCollector {}", buildScanCollector.text)
     }
 }
 
 processResources {
     from configurations.mvnExtensions
+    from configurations.dvBootstrapTool {
+        rename "${dvBootstrapToolArtifact}-.*.jar", "${dvBootstrapToolArtifact}.jar"
+    }
+
     from generateInitScript
+
+    doLast {
+        if (resolvedDvBootstrapToolVersion.present) {
+            def versionFile = new File(destinationDir, "${dvBootstrapToolArtifact}-version.txt")
+            versionFile.write(resolvedDvBootstrapToolVersion.get())
+        }
+    }
 }
 
 java {

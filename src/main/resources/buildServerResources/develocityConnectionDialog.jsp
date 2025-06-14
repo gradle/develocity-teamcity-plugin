@@ -44,7 +44,11 @@
 
 <tr>
     <td colspan="2">
-        <div class="smallNoteAttention">The access key must be in the <b>&lt;server host name&gt;=&lt;access key&gt;</b> format. For more details please refer to the <a href="https://docs.gradle.com/develocity/gradle-plugin/#manual_access_key_configuration" target="_blank">documentation</a>.</div>
+        <div class="smallNoteAttention">The access key must be in the <b>&lt;server host name&gt;=&lt;access key&gt;</b>
+            format. For more details please refer to the <a
+                    href="https://docs.gradle.com/develocity/gradle-plugin/#manual_access_key_configuration"
+                    target="_blank">documentation</a>.
+        </div>
     </td>
 </tr>
 
@@ -53,7 +57,8 @@
     <td>
         <props:textProperty name="${keys.develocityAccessTokenExpiry}" className="longField"/>
         <span class="error" id="error_${keys.develocityAccessTokenExpiry}"></span>
-        <span class="smallNote">The short-lived access tokens expiry in hours. Defaults to 2 hours. For more information, please refer to the <a href="https://docs.gradle.com/enterprise/api-manual/#short_lived_access_tokens" target="_blank">documentation</a>.</span>
+        <span class="smallNote">The short-lived access tokens expiry in hours. Defaults to 2 hours. For more information, please refer to the <a
+                href="https://docs.gradle.com/enterprise/api-manual/#short_lived_access_tokens" target="_blank">documentation</a>.</span>
     </td>
 </tr>
 
@@ -74,6 +79,26 @@
     <td>
         <props:checkboxProperty name="${keys.enforceDevelocityUrl}"/>
         <span class="smallNote">Whether to enforce the Develocity Server URL configured in this connection over a URL configured in the project's build.</span>
+    </td>
+</tr>
+
+<tr class="groupingTitle">
+    <td colspan="2"><strong>Restore bootstrap state from Develocity Settings</strong></td>
+</tr>
+
+<tr>
+    <td><label for="${keys.enableRestoreBootstrapState}">Enable restoring bootstrap state:</label></td>
+    <td>
+        <props:checkboxProperty name="${keys.enableRestoreBootstrapState}"/>
+        <span class="smallNote">Whether to enable restoring the bootstrap state of the CI agent from Develocity.</span>
+    </td>
+</tr>
+
+<tr>
+    <td><label for="${keys.bootstrapImageName}">Image Name:</label></td>
+    <td>
+        <props:textProperty name="${keys.bootstrapImageName}" className="longField"/>
+        <span class="smallNote">The name of the image for restoring bootstrapping state from Develocity.</span>
     </td>
 </tr>
 
@@ -145,7 +170,8 @@
 </tr>
 
 <tr>
-    <td><label for="${keys.commonCustomUserDataExtensionVersion}">Common Custom User Data Maven Extension Version:</label></td>
+    <td><label for="${keys.commonCustomUserDataExtensionVersion}">Common Custom User Data Maven Extension
+        Version:</label></td>
     <td>
         <props:textProperty name="${keys.commonCustomUserDataExtensionVersion}" className="longField"/>
         <span class="smallNote">The version of the Common Custom User Data Maven Extension to apply to Maven builds.</span>
@@ -153,7 +179,8 @@
 </tr>
 
 <tr class="advancedSetting">
-    <td><label for="${keys.customDevelocityExtensionCoordinates}">Develocity Maven Extension Custom Coordinates:</label></td>
+    <td><label for="${keys.customDevelocityExtensionCoordinates}">Develocity Maven Extension Custom Coordinates:</label>
+    </td>
     <td>
         <props:textProperty name="${keys.customDevelocityExtensionCoordinates}" className="longField"/>
         <span class="smallNote">The coordinates of a custom extension that has a transitive dependency on the Develocity Maven Extension.</span>
@@ -161,7 +188,8 @@
 </tr>
 
 <tr class="advancedSetting">
-    <td><label for="${keys.customCommonCustomUserDataExtensionCoordinates}">Common Custom User Data Maven Extension Custom Coordinates:</label></td>
+    <td><label for="${keys.customCommonCustomUserDataExtensionCoordinates}">Common Custom User Data Maven Extension
+        Custom Coordinates:</label></td>
     <td>
         <props:textProperty name="${keys.customCommonCustomUserDataExtensionCoordinates}" className="longField"/>
         <span class="smallNote">The coordinates of a custom Common Custom User Data Maven Extension or of a custom extension that has a transitive dependency on it.</span>
