@@ -8,10 +8,23 @@ def gradleRepoUsername = providers.gradleProperty("gradleInternalRepositoryUsern
 def gradleRepoPassword = providers.gradleProperty("gradleInternalRepositoryPassword").orElse("").get()
 def dvBootstrapToolIsAvailable = gradleRepoUsername != "" && gradleRepoPassword != ""
 
+// Consume the Develocity Bootstrap CLI tool from a local repository, for easier development
+def localRepository = providers.gradleProperty("localBootstrapRepository").orElse("").get()
+
 repositories {
     mavenCentral()
 
-    if (dvBootstrapToolIsAvailable) {
+    if (localRepository && new File(localRepository).exists()) {
+        maven {
+            url = uri(localRepository)
+
+            logger.log(LogLevel.LIFECYCLE, "Using Develocity bootstrap CLI from local repository: ${url}")
+
+            content {
+                it.includeModule("com.gradle", "develocity-bootstrap-cli")
+            }
+        }
+    } else if (dvBootstrapToolIsAvailable) {
         maven {
             url = uri("https://repo.grdev.net/artifactory/enterprise-libs-releases-local")
 

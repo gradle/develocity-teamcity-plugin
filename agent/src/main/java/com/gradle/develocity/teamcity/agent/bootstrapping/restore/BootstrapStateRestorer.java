@@ -3,6 +3,7 @@ package com.gradle.develocity.teamcity.agent.bootstrapping.restore;
 import com.intellij.openapi.diagnostic.Logger;
 import jetbrains.buildServer.agent.AgentLifeCycleAdapter;
 import jetbrains.buildServer.agent.AgentLifeCycleListener;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.agent.BuildRunnerContext;
 import jetbrains.buildServer.util.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
@@ -11,8 +12,6 @@ import java.net.URI;
 import java.util.Optional;
 
 public class BootstrapStateRestorer extends AgentLifeCycleAdapter {
-
-    private static final Logger LOG = Logger.getInstance("jetbrains.buildServer.AGENT");
 
     // TeamCity Develocity configuration parameters
     private static final String ENABLE_RESTORE_BOOTSTRAP_STATE_CONFIG_PARAM = "develocityPlugin.enable-restore-bootstrap-state";
@@ -26,8 +25,12 @@ public class BootstrapStateRestorer extends AgentLifeCycleAdapter {
     @Override
     public void beforeRunnerStart(@NotNull BuildRunnerContext context) {
         if (isEnabledForJob(context)) {
+            BuildProgressLogger buildLogger = context.getBuild().getBuildLogger();
+
             String imageName = getImageName(context);
-            LOG.info(String.format("Restoring bootstrap state for job %s from image with name %s", getJobId(context), imageName));
+
+            buildLogger.activityStarted("Develocity: restoring bootstrap state", "RESTORE_BOOTSTRAP_STATE");
+            buildLogger.message(String.format("Restoring bootstrap state for job %s from image with name %s", getJobId(context), imageName));
 
             BootstrapStateRestoreService restoreService = new BootstrapStateRestoreService(URI.create("http://develocity.server.url"), "token", context);
             Optional<RestoreResponse> maybeRestoreResponse = restoreService.restoreFrom(imageName);
@@ -43,6 +46,8 @@ public class BootstrapStateRestorer extends AgentLifeCycleAdapter {
                         throw new IllegalArgumentException("Unsupported build type: " + buildType.name());
                 }
             });
+
+            buildLogger.activityFinished("Develocity: restoring bootstrap state", "RESTORE_BOOTSTRAP_STATE");
         }
     }
 

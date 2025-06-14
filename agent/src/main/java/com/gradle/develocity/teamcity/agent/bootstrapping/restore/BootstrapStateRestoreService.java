@@ -4,6 +4,8 @@ import com.gradle.develocity.teamcity.agent.bootstrapping.restore.JdkProvider.Jd
 import com.gradle.develocity.teamcity.agent.bootstrapping.restore.process.ExecutionResult;
 import com.gradle.develocity.teamcity.agent.bootstrapping.restore.process.ProcessExecutor;
 import com.intellij.openapi.diagnostic.Logger;
+
+import jetbrains.buildServer.agent.BuildProgressLogger;
 import jetbrains.buildServer.agent.BuildRunnerContext;
 
 import java.net.URI;
@@ -26,12 +28,14 @@ public class BootstrapStateRestoreService {
     private final String token;
     private final JdkProvider jdkProvider;
     private final DevelocityBootstrapCliToolProvider cliToolProvider;
+    private final BuildProgressLogger buildLogger;
 
     BootstrapStateRestoreService(URI develocityUrl, String token, BuildRunnerContext context) {
         this.develocityUrl = develocityUrl;
         this.token = token;
         this.jdkProvider = new JdkProvider(context);
         this.cliToolProvider = new DevelocityBootstrapCliToolProvider(context);
+        this.buildLogger = context.getBuild().getBuildLogger();
     }
 
     Optional<RestoreResponse> restoreFrom(String imageName) {
@@ -46,10 +50,11 @@ public class BootstrapStateRestoreService {
         }
 
         JdkLocation jdkLocation = maybeJdkLocation.get();
-        LOG.info(format("Using JDK at '%s'", jdkLocation.executablePath().toString()));
+        String message = format("Using JDK at '%s'", jdkLocation.executablePath().toString());
+        log(message);
 
         Path dvBootstrapCliTool = maybeDvBootstrapCliTool.get();
-        LOG.info(format("Using DV bootstrap cli tool at '%s'", dvBootstrapCliTool.toString()));
+        log(format("Using DV bootstrap cli tool at '%s'", dvBootstrapCliTool.toString()));
 
         try (ProcessExecutor executor = new ProcessExecutor()) {
             try {
@@ -57,13 +62,19 @@ public class BootstrapStateRestoreService {
                         jdkLocation.executablePath().toString(),
                         "-jar",
                         dvBootstrapCliTool.toString(),
-                        "restore"
+                        "restore",
+                        "gradle",
+                        "--image-name=" + imageName,
+                        // Use a local cache for now, pending an Edge-backed implementation.
+                        "--local-only",
+                        "--working-directory=/tmp/dv-bootstrap/working",
+                        "--target-directory=/tmp/dv-bootstrap/target"
                 );
 
                 ExecutionResult result = executor.execute(command, RESTORE_TIMEOUT);
 
-                LOG.info("Got stdout: " + result.stdout());
-                LOG.info("Got stderr: " + result.stderr());
+                log("Got stdout: " + result.stdout());
+                log("Got stderr: " + result.stderr());
             } catch (ExecutionException e) {
                 LOG.error("Executing restore service failed with execution exception", e);
                 return Optional.empty();
@@ -90,6 +101,11 @@ public class BootstrapStateRestoreService {
                         Duration.ofSeconds(42)
                 )
         );
+    }
+
+    private void log(String message) {
+        LOG.info(message);
+        buildLogger.message(message);
     }
 
 }
